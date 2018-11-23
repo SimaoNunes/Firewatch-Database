@@ -20,12 +20,12 @@ DROP TABLE IF EXISTS solicita;
 -- Table Creation
 ----------------------------------------
 
-CREATE TABLE camara (
+CREATE TABLE camara(
     numCamara INT NOT NULL UNIQUE,
     PRIMARY KEY(numCamara)
 );
 
-CREATE TABLE video (
+CREATE TABLE video(
     dataHoraInicio TIMESTAMP NOT NULL,
     dataHoraFim TIMESTAMP NOT NULL,
     numCamara INT NOT NULL,
@@ -79,6 +79,7 @@ CREATE TABLE entidadeMeio(
 CREATE TABLE meio(
     numMeio INT NOT NULL,
     nomeMeio VARCHAR(255) NOT NULL,
+    nomeEntidade VARCHAR(255) NOT NULL,
     PRIMARY KEY(numMeio, nomeMeio),
     FOREIGN KEY(nomeEntidade) REFERENCES entidadeMeio(nomeEntidade) ON DELETE CASCADE
 );
