@@ -29,7 +29,7 @@ for i in range (0, 100):
             for k in range (0, numSegmentos):
                 numSegmento = k
 
-                if (k != numSegmento - 1):
+                if (k != numSegmentos - 1):
                     duracaoSegmento = 1
                     duracao -= 1
                 else:
