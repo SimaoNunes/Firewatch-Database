@@ -61,10 +61,9 @@ CREATE TABLE eventoEmergencia(
     nomePessoa VARCHAR(255),
     moradaLocal VARCHAR(255),
     numProcessoSocorro INT,
-    PRIMARY KEY(numTelefone, instanteChamada)
+    PRIMARY KEY(numTelefone, instanteChamada),
     FOREIGN KEY(moradaLocal) REFERENCES local(moradaLocal) ON DELETE CASCADE,
-    FOREIGN KEY(numProcessoSocorro) REFERENCES processoSocorro(numProcessoSocorro) ON DELETE CASCADE,
-    UNIQUE KEY(numTelefone, nomePessoa)
+    FOREIGN KEY(numProcessoSocorro) REFERENCES processoSocorro(numProcessoSocorro) ON DELETE CASCADE
 );
 
 CREATE TABLE processoSocorro(
@@ -92,12 +91,9 @@ CREATE TABLE meioCombate(
 );
 
 CREATE TABLE meioApoio(
-    numMeio IdataHoraInicio TIMESTAMP NOT NULL,
-    dataHoraFim TIMESTAMP NOT NULL,NT NOT NULL,
-    nomeEntiddataHoraInicio TIMESTAMP NOT NULL,
-    dataHoraFim TIMESTAMP NOT NULL,ade VARCHAR(255) NOT NULL,
-    PRIMARY KdataHoraInicio TIMESTAMP NOT NULL,
-    dataHoraFim TIMESTAMP NOT NULL,EY(numMeio, nomeEntidade),
+    numMeio INT NOT NULL,
+    nomeEntidade VARCHAR(255) NOT NULL,
+    PRIMARY KEY(numMeio, nomeEntidade),
     FOREIGN KEY(numMeio, nomeEntidade) REFERENCES meio(numMeio, nomeEntidade) ON DELETE CASCADE
 );
 
@@ -151,7 +147,7 @@ CREATE TABLE audita(
     dataAuditoria TIMESTAMP NOT NULL,
     texto TEXT NOT NULL,
     PRIMARY KEY(idCoordenador, numMeio, nomeEntidade, numProcessoSocorro, dataHoraInicio, dataHoraFim, dataAuditoria, texto),
-    FOREIGN KEY(numMeio, nomeEntidade, numProcessoSocorro) REFERENCES acciona(numMeio, nomeEntidade, numProcessoSocorro) ON DELETE CASCADE
+    FOREIGN KEY(numMeio, nomeEntidade, numProcessoSocorro) REFERENCES acciona(numMeio, nomeEntidade, numProcessoSocorro) ON DELETE CASCADE,
     FOREIGN KEY(idCoordenador) REFERENCES coordenador(idCoordenador) ON DELETE CASCADE
 );
 
