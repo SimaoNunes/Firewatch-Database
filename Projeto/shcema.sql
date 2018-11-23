@@ -35,7 +35,7 @@ CREATE TABLE video (
 
 CREATE TABLE segmentoVideo (
     numSegmento INT NOT NULL UNIQUE,
-    duracao INT,
+    duracao INT NOT NULL,
     dataHoraInicio TIMESTAMP NOT NULL,
     numCamara INT NOT NULL,
     PRIMARY KEY(numSegmento, dataHoraInicio, numCamara),
@@ -161,5 +161,3 @@ CREATE TABLE solicita(
     FOREIGN KEY(idCoordenador) REFERENCES coordenador(idCoordenador) ON DELETE CASCADE,
     FOREIGN KEY(dataHoraInicioVideo, numCamara) REFERENCES video(dataHoraInicioVideo, numCamara) ON DELETE CASCADE
 );
-
-
