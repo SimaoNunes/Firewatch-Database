@@ -16,8 +16,6 @@ DROP TABLE coordenador;
 DROP TABLE audita;
 DROP TABLE solicita;
 
-
-
 ----------------------------------------
 -- Table Creation
 ----------------------------------------
@@ -48,7 +46,6 @@ CREATE TABLE local(
     moradaLocal VARCHAR(255),
     PRIMARY KEY(moradaLocal)
 );
-
 
 CREATE TABLE vigia(
     moradaLocal VARCHAR(255),
@@ -83,6 +80,10 @@ CREATE TABLE meio(
     nomeMeio VARCHAR(255) NOT NULL,
     PRIMARY KEY(numMeio, nomeEntidade),
     FOREIGN KEY(nomeEntidade) REFERENCES entidadeMeio(nomeEntidade) ON DELETE CASCADE
-)
+);
 
-
+CREATE TABLE meioCombate(
+    numMeio INT NOT NULL,
+    nomeEntidade VARCHAR(255) NOT NULL,
+    PRIMARY KEY(numMeio, nomeEntidade)
+);
