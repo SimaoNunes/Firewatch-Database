@@ -85,5 +85,6 @@ CREATE TABLE meio(
 CREATE TABLE meioCombate(
     numMeio INT NOT NULL,
     nomeEntidade VARCHAR(255) NOT NULL,
-    PRIMARY KEY(numMeio, nomeEntidade)
+    PRIMARY KEY(numMeio, nomeEntidade),
+    FOREIGN KEY(numMeio, nomeEntidade) REFERENCES Meio(numMeio, nomeEntidade) ON DELETE CASCADE
 );
