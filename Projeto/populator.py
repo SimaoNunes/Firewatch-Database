@@ -30,6 +30,9 @@ locais = []
 vigia = []
 eventos = []
 processos = []
+entidades = []
+
+
 
 #-----------------------------------------
 #--   Camaras, Video e SegmentoVideo
@@ -42,21 +45,21 @@ for i in range (0, 103):
     j = 0
     while j < 4:
         dataHoraInicio = randint(1451606400, 1546300799) # 2016 <= dataHoraInicio <= 2018
-        duracao = randint(5, 30)
+        duracao = randint(10, 30)
         dataHoraFim = dataHoraInicio + duracao*60
         numCamara = randint(1, 100)
 
         if (dataHoraInicio not in used):
             used.append(dataHoraInicio)
             videos.append('insert into video values(' + str(dataHoraInicio) + ', ' + str(dataHoraFim) + ', ' + str(numCamara) + ');')
-            numSegmentos = randint(1, 4)
+            numSegmentos = randint(1, 2)
 
             for k in range (0, numSegmentos):
                 numSegmento = k
 
                 if (k != numSegmentos - 1):
-                    duracaoSegmento = 1
-                    duracao -= 1
+                    duracaoSegmento = 2
+                    duracao -= 2
 
                 else:
                     duracaoSegmento = duracao
@@ -73,10 +76,10 @@ for i in range (0, 103):
 #-----------------------------------------
 
 for cidade in cidades:
-    locais.append('insert into local values(' + cidade + ');')
+    locais.append('insert into local values(\'' + cidade + '\');')
 
 for i in range(0, 103):
-    vigia.append('insert into vigia values(' + cidades[randint(0, len(cidades) - 1)] + ', ' + str(i) + ');')
+    vigia.append('insert into vigia values(\'' + cidades[randint(0, len(cidades) - 1)] + '\', ' + str(i) + ');')
 
 
 
@@ -92,7 +95,7 @@ for i in range(0, 150):
     nome = nomes[randint(0, len(nomes) - 1)]
     morada = cidades[randint(0, len(cidades) - 1)]
 
-    eventos.append('insert into eventoEmergencia values(' + str(numTelefone) + ', ' + str(instanteChamada) + ', ' + nome + ', ' + morada + ', ' + str(numProcessoSocorro) + ');')
+    eventos.append('insert into eventoEmergencia values(' + str(numTelefone) + ', ' + str(instanteChamada) + ', \'' + nome + '\', \'' + morada + '\', ' + str(numProcessoSocorro) + ');')
 
     numTelefone += 1
     instanteChamada += randint(0,1000000)
@@ -111,38 +114,61 @@ for i in range(0, 103):
 
 
 #-----------------------------------------
+#--   Entidade Meio
+#-----------------------------------------
+
+tipos = ["Bombeiros de ", "Polícia de ", "Junta de Freguesia de "]
+
+for i in range (0, 103):
+    entidades.append('insert into entidadeMeio values(\'' + tipos[randint(0, len(tipos) - 1)] + cidades[randint(0, len(cidades) - 1)] + '\');')
+
+
+
+#-----------------------------------------
 #--   Prints
 #-----------------------------------------
 
-'''for x in camaras:
-    print(x)
+def printAll():
+    for x in camaras:
+        print(x)
 
-print()
+    print()
 
-for x in videos:
-    print(x)
+    for x in videos:
+        print(x)
 
-print()
+    print()
 
-for x in segmentos:
-    print(x)
+    for x in segmentos:
+        print(x)
 
-print()
+    print()
 
-for x in locais:
-    print(x)
+    for x in locais:
+        print(x)
 
-print()
+    print()
 
-for x in vigia:
-    print(x)
+    for x in vigia:
+        print(x)
 
-print()
+    print()
 
-for x in eventos:
-    print(x)
+    for x in eventos:
+        print(x)
 
-print()
+    print()
 
-for x in processos:
-    print(x)'''
+    for x in processos:
+        print(x)
+
+    print()
+
+    for x in entidades:
+        print(x)
+
+    print()
+    
+
+
+printAll()
