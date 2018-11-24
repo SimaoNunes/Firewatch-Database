@@ -205,6 +205,15 @@ for i in range(0, 102):
 
 
 #-----------------------------------------
+#--   Coordenador
+#-----------------------------------------
+
+for i in range (0, 102):
+    coordenadores.append('insert into coordenador values(' + str(i) + ');')
+
+
+
+#-----------------------------------------
 #--   Prints
 #-----------------------------------------
 
@@ -280,6 +289,11 @@ def printAll():
     print('\n\n')
 
     for x in acciona:
+        print(x)
+
+    print('\n\n')
+
+    for x in coordenadores:
         print(x)
     
 
