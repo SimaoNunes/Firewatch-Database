@@ -28,7 +28,7 @@ vigia = []
 #--------------------------------------
 used = []
 
-for i in range (0, 100):
+for i in range (0, 103):
     camaras.append('insert into camara values(' + str(i) + ');')
 
     j = 0
@@ -66,6 +66,9 @@ for i in range (0, 100):
 
 for cidade in cidades:
     locais.append('insert into local values(' + cidade + ');')
+
+    for i in range(0, 103):
+        vigia.append('insert into vigia values(' + cidade + ', ' + str(i) + ');')
 
 
 
