@@ -148,9 +148,24 @@ while i < 102:
 #--   Meio (Combate, Apoio, Socorro)
 #-----------------------------------------
 
+todosMeios = []
+
 for nomeEntidade in todasEntidades:
+
     for i in range (0, randint(3,5)):
-        meios.append('insert into meio values(' + str(i) + ', \'' + nomesMeios[randint(0, len(nomesMeios) - 1)] + '\', \'' + nomeEntidade + '\');')
+        meio = str(i) + ', \'' + nomesMeios[randint(0, len(nomesMeios) - 1)] + '\', \'' + nomeEntidade
+        todosMeios.append(meio)
+
+        meios.append('insert into meio values(' + meio + '\');')
+
+        if i % 3 == 0:
+            meiosCombate.append('insert into meioCombate values(' + str(i) + ', \'' + nomeEntidade + '\');')
+
+        elif i % 3 == 1:
+            meiosApoio.append('insert into meioApoio values(' + str(i) + ', \'' + nomeEntidade + '\');')
+
+        else:
+            meiosSocorro.append('insert into meioSocorro values(' + str(i) + ', \'' + nomeEntidade + '\');')
 
 
 
@@ -200,6 +215,21 @@ def printAll():
     print('\n\n')
 
     for x in meios:
+        print(x)
+
+    print('\n\n')
+
+    for x in meiosCombate:
+        print(x)
+
+    print('\n\n')
+
+    for x in meiosApoio:
+        print(x)
+
+    print('\n\n')
+
+    for x in meiosSocorro:
         print(x)
     
 
