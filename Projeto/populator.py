@@ -161,10 +161,10 @@ todosMeiosSocorro = []
 for nomeEntidade in todasEntidades:
 
     for i in range (0, randint(3,5)):
-        meio = str(i) + ', \'' + nomesMeios[randint(0, len(nomesMeios) - 1)] + '\', \'' + nomeEntidade
+        meio = str(i) + ', \'' + nomeEntidade
         todosMeios.append(meio)
 
-        meios.append('insert into meio values(' + meio + '\');')
+        meios.append('insert into meio values(' + str(i) + ', \'' + nomesMeios[randint(0, len(nomesMeios) - 1)] + '\', \'' + nomeEntidade + '\');')
 
         if i % 3 == 0:
             meiosCombate.append('insert into meioCombate values(' + str(i) + ', \'' + nomeEntidade + '\');')
@@ -191,6 +191,16 @@ for i in range(0, 102):
     for j in range(0,2):
         transporta.append('insert into transporta values(' + todosMeiosSocorro[(i+j) % len(todosMeiosSocorro) - 1] + '\', ' + str(randint(5, 20)) + ', ' + str(i) + ');')
         alocado.append('insert into alocado values(' + todosMeiosApoio[(i+j) % len(todosMeiosApoio) - 1] + '\', ' + str(randint(1, 10)) + ', ' + str(i) + ');')
+
+
+
+#-----------------------------------------
+#--   Acciona
+#-----------------------------------------
+
+for i in range(0, 102):
+    for j in range(0,3):
+        acciona.append('insert into acciona values(' + todosMeios[(i+j) % len(todosMeios) - 1] + '\', ' + str(i) + ');')
 
 
 
@@ -265,6 +275,11 @@ def printAll():
     print('\n\n')
 
     for x in alocado:
+        print(x)
+
+    print('\n\n')
+
+    for x in acciona:
         print(x)
     
 
