@@ -149,6 +149,8 @@ while i < 102:
 #-----------------------------------------
 
 todosMeios = []
+todosMeiosApoio = []
+todosMeiosSocorro = []
 
 for nomeEntidade in todasEntidades:
 
@@ -162,10 +164,24 @@ for nomeEntidade in todasEntidades:
             meiosCombate.append('insert into meioCombate values(' + str(i) + ', \'' + nomeEntidade + '\');')
 
         elif i % 3 == 1:
-            meiosApoio.append('insert into meioApoio values(' + str(i) + ', \'' + nomeEntidade + '\');')
+            meio = str(i) + ', \'' + nomeEntidade
+            todosMeiosApoio.append(meio)
+
+            meiosApoio.append('insert into meioApoio values(' + meio + '\');')
 
         else:
-            meiosSocorro.append('insert into meioSocorro values(' + str(i) + ', \'' + nomeEntidade + '\');')
+            meio = str(i) + ', \'' + nomeEntidade
+            todosMeiosSocorro.append(meio)
+
+            meiosSocorro.append('insert into meioSocorro values(' + meio + '\');')
+
+
+
+#-----------------------------------------
+#--   Meio (Combate, Apoio, Socorro)
+#-----------------------------------------
+
+
 
 
 
