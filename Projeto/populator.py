@@ -43,6 +43,12 @@ meios = []
 meiosCombate = []
 meiosApoio = []
 meiosSocorro = []
+transporta = []
+alocado = []
+acciona = []
+coordenadores = []
+audita = []
+solicita = []
 
 
 
@@ -178,10 +184,13 @@ for nomeEntidade in todasEntidades:
 
 
 #-----------------------------------------
-#--   Meio (Combate, Apoio, Socorro)
+#--   Tranporta, Alocado
 #-----------------------------------------
 
-
+for i in range(0, 102):
+    for j in range(0,2):
+        transporta.append('insert into transporta values(' + todosMeiosSocorro[(i+j) % len(todosMeiosSocorro) - 1] + '\', ' + str(randint(5, 20)) + ', ' + str(i) + ');')
+        alocado.append('insert into alocado values(' + todosMeiosApoio[(i+j) % len(todosMeiosApoio) - 1] + '\', ' + str(randint(1, 10)) + ', ' + str(i) + ');')
 
 
 
@@ -246,6 +255,16 @@ def printAll():
     print('\n\n')
 
     for x in meiosSocorro:
+        print(x)
+
+    print('\n\n')
+
+    for x in transporta:
+        print(x)
+
+    print('\n\n')
+
+    for x in alocado:
         print(x)
     
 
