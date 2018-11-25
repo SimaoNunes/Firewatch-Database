@@ -198,9 +198,14 @@ for i in range(0, 102):
 #--   Acciona
 #-----------------------------------------
 
+accionamentos = []
+
 for i in range(0, 102):
     for j in range(0,3):
-        acciona.append('insert into acciona values(' + todosMeios[(i+j) % len(todosMeios) - 1] + '\', ' + str(i) + ');')
+        accionamento = todosMeios[(i+j) % len(todosMeios)] + '\', ' + str(i)
+        accionamentos.append(accionamento)
+
+        acciona.append('insert into acciona values(' + accionamento + ');')
 
 
 
@@ -210,6 +215,28 @@ for i in range(0, 102):
 
 for i in range (0, 102):
     coordenadores.append('insert into coordenador values(' + str(i) + ');')
+
+
+
+#-----------------------------------------
+#--   Audita
+#-----------------------------------------
+
+texto = "Auditado."
+
+for i in range (0, 102):
+    dataHoraInicio = randint(1451606400, 1546300699)
+    dataHoraFim = dataHoraInicio + randint(120, 1200)
+    dataAuditoria = dataHoraInicio
+    accionamento = accionamentos[randint(0, len(accionamentos) - 1)]
+
+    audita.append('insert into audita values(' + str(i) + ', ' + accionamento + ', ' + str(dataHoraInicio) + ', ' + str(dataHoraFim) + ', ' + str(dataAuditoria) + ', \'' + texto + '\');')
+
+
+
+#-----------------------------------------
+#--   Solicita
+#-----------------------------------------
 
 
 
@@ -294,6 +321,11 @@ def printAll():
     print('\n\n')
 
     for x in coordenadores:
+        print(x)
+
+    print('\n\n')
+
+    for x in audita:
         print(x)
     
 
