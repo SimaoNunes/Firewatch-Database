@@ -4,7 +4,7 @@
 	$user="ist186512";		// -> replace by the user name
 	$host="db.ist.utl.pt";	        // -> server where postgres is running
 	$port=5432;			// -> default port where Postgres is installed
-	$password="nacREH7641";	        // -> replace with the passoword
+	$password="oxgd2661";	        // -> replace with the passoword
 	$dbname = $user;		// -> by default the name of the database is the name of the user
 	
 	$connection = pg_connect("host=$host port=$port user=$user password=$password dbname=$dbname") or die(pg_last_error());
