@@ -55,6 +55,8 @@ solicita = []
 #-----------------------------------------
 #--   Camaras, Video e SegmentoVideo
 #-----------------------------------------
+
+todosVideos = []
 used = []
 
 for i in range (0, 102):
@@ -69,6 +71,7 @@ for i in range (0, 102):
 
         if (dataHoraInicio not in used):
             used.append(dataHoraInicio)
+            todosVideos.append(str(dataHoraInicio) + ', ' + str(numCamara))
             videos.append('insert into video values(' + str(dataHoraInicio) + ', ' + str(dataHoraFim) + ', ' + str(numCamara) + ');')
             numSegmentos = randint(1, 2)
 
@@ -238,6 +241,13 @@ for i in range (0, 102):
 #--   Solicita
 #-----------------------------------------
 
+for i in range (0, 102):
+    dataHoraInicio = randint(1451606400, 1546300699)
+    dataHoraFim = dataHoraInicio + randint(120, 1200)
+    video = todosVideos[randint(0, len(todosVideos) - 1)]
+
+    solicita.append('insert into solicita values(' + str(i) + ', ' + video + ', ' + str(dataHoraInicio) + ', ' + str(dataHoraFim) + ');')
+
 
 
 #-----------------------------------------
@@ -327,6 +337,13 @@ def printAll():
 
     for x in audita:
         print(x)
+
+    print('\n\n')
+
+    for x in solicita:
+        print(x)
+
+    
     
 
 
