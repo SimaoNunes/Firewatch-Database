@@ -56,7 +56,7 @@ CREATE TABLE vigia(
 );
 
 CREATE TABLE processoSocorro(
-    numProcessoSocorro INT,
+    numProcessoSocorro INT NOT NULL,
     PRIMARY KEY(numProcessoSocorro)
 );
 
@@ -65,7 +65,7 @@ CREATE TABLE eventoEmergencia(
     instanteChamada TIMESTAMP NOT NULL,
     nomePessoa VARCHAR(255),
     moradaLocal VARCHAR(255),
-    numProcessoSocorro INT,
+    numProcessoSocorro INT NOT NULL,
     PRIMARY KEY(numTelefone, instanteChamada),
     FOREIGN KEY(moradaLocal) REFERENCES local(moradaLocal) ON DELETE CASCADE,
     FOREIGN KEY(numProcessoSocorro) REFERENCES processoSocorro(numProcessoSocorro) ON DELETE CASCADE
@@ -109,7 +109,7 @@ CREATE TABLE transporta(
     numMeio INT NOT NULL,
     nomeEntidade VARCHAR(255) NOT NULL,
     numVitimas INT,
-    numProcessoSocorro INT,
+    numProcessoSocorro INT NOT NULL ,
     PRIMARY KEY(numMeio, nomeEntidade, numProcessoSocorro),
     FOREIGN KEY(numMeio, nomeEntidade) REFERENCES meioSocorro(numMeio, nomeEntidade) ON DELETE CASCADE,
     FOREIGN KEY(numProcessoSocorro) REFERENCES processoSocorro(numProcessoSocorro) ON DELETE CASCADE
@@ -119,7 +119,7 @@ CREATE TABLE alocado(
     numMeio INT NOT NULL,
     nomeEntidade VARCHAR(255) NOT NULL,
     numHoras INT NOT NULL,
-    numProcessoSocorro INT,
+    numProcessoSocorro INT NOT NULL,
     FOREIGN KEY(numMeio, nomeEntidade) REFERENCES meioSocorro(numMeio, nomeEntidade) ON DELETE CASCADE,
     FOREIGN KEY(numProcessoSocorro) REFERENCES processoSocorro(numProcessoSocorro) ON DELETE CASCADE
 );
@@ -127,7 +127,7 @@ CREATE TABLE alocado(
 CREATE TABLE acciona(
     numMeio INT NOT NULL,
     nomeEntidade VARCHAR(255) NOT NULL,
-    numProcessoSocorro INT,
+    numProcessoSocorro INT NOT NULL,
     PRIMARY KEY(numMeio, nomeEntidade, numProcessoSocorro),
     FOREIGN KEY(numMeio, nomeEntidade) REFERENCES meio(numMeio, nomeEntidade) ON DELETE CASCADE,
     FOREIGN KEY(numProcessoSocorro) REFERENCES processoSocorro(numProcessoSocorro) ON DELETE CASCADE
@@ -142,7 +142,7 @@ CREATE TABLE audita(
     idCoordenador INT NOT NULL UNIQUE,
     numMeio INT NOT NULL,
     nomeEntidade VARCHAR(255) NOT NULL,
-    numProcessoSocorro INT,
+    numProcessoSocorro INT NOT NULL,
     dataHoraInicio TIMESTAMP NOT NULL,
     dataHoraFim TIMESTAMP NOT NULL,
     dataAuditoria TIMESTAMP NOT NULL,
