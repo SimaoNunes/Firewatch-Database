@@ -55,6 +55,11 @@ CREATE TABLE vigia(
     FOREIGN KEY(numCamara) REFERENCES camara(numCamara) ON DELETE CASCADE
 );
 
+CREATE TABLE processoSocorro(
+    numProcessoSocorro INT,
+    PRIMARY KEY(numProcessoSocorro)
+);
+
 CREATE TABLE eventoEmergencia(
     numTelefone VARCHAR(13) NOT NULL,
     instanteChamada TIMESTAMP NOT NULL,
@@ -64,11 +69,6 @@ CREATE TABLE eventoEmergencia(
     PRIMARY KEY(numTelefone, instanteChamada),
     FOREIGN KEY(moradaLocal) REFERENCES local(moradaLocal) ON DELETE CASCADE,
     FOREIGN KEY(numProcessoSocorro) REFERENCES processoSocorro(numProcessoSocorro) ON DELETE CASCADE
-);
-
-CREATE TABLE processoSocorro(
-    numProcessoSocorro INT,
-    PRIMARY KEY(numProcessoSocorro)
 );
 
 CREATE TABLE entidadeMeio(
@@ -162,3 +162,5 @@ CREATE TABLE solicita(
     FOREIGN KEY(idCoordenador) REFERENCES coordenador(idCoordenador) ON DELETE CASCADE,
     FOREIGN KEY(dataHoraInicioVideo, numCamara) REFERENCES video(dataHoraInicioVideo, numCamara) ON DELETE CASCADE
 );
+
+insert into camara values(0);

@@ -11,7 +11,7 @@
 	
 	echo("<p>Connected to Postgres on $host as user $user on database $dbname.</p>");
 	
-	$sql = "SELECT * FROM account;";
+	$sql = "SELECT * FROM camara;";
 
 	echo($sql);
 
