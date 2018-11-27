@@ -99,7 +99,6 @@ for i in range (0, 102):
                 timeStampInicio = toTimestamp(dataHoraInicio)
 
                 segmentos.append('insert into segmentoVideo values(' + str(numSegmento) + ', ' + str(duracaoSegmento) + ', ' + timeStampInicio + ', ' + str(i) + ');')
-                dataHoraInicio += duracaoSegmento*60
 
             j += 1
 
