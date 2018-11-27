@@ -53,6 +53,13 @@ solicita = []
 
 
 
+def toTimestamp(timestamp):
+    string = datetime.datetime.fromtimestamp(timestamp)
+
+    return '\'' + string.strftime('%Y-%m-%d %H:%M:%S') + '\''
+
+
+
 #-----------------------------------------
 #--   Camaras, Video e SegmentoVideo
 #-----------------------------------------
@@ -73,7 +80,10 @@ for i in range (0, 102):
         if (dataHoraInicio not in used):
             used.append(dataHoraInicio)
             todosVideos.append(str(dataHoraInicio) + ', ' + str(i))
-            videos.append('insert into video values(' + str(dataHoraInicio) + ', ' + str(dataHoraFim) + ', ' + str(i) + ');')
+
+            timeStampInicio = toTimestamp(dataHoraInicio)
+            timeStampFim = toTimestamp(dataHoraFim)
+            videos.append('insert into video values(' + timeStampInicio + ', ' + timeStampFim + ', ' + str(i) + ');')
             numSegmentos = randint(1, 2)
 
             for k in range (0, numSegmentos):
@@ -86,7 +96,9 @@ for i in range (0, 102):
                 else:
                     duracaoSegmento = duracao
 
-                segmentos.append('insert into segmentoVideo values(' + str(numSegmento) + ', ' + str(duracaoSegmento) + ', ' + str(dataHoraInicio) + ', ' + str(i) + ');')
+                timeStampInicio = toTimestamp(dataHoraInicio)
+
+                segmentos.append('insert into segmentoVideo values(' + str(numSegmento) + ', ' + str(duracaoSegmento) + ', ' + timeStampInicio + ', ' + str(i) + ');')
                 dataHoraInicio += duracaoSegmento*60
 
             j += 1
@@ -117,7 +129,8 @@ for i in range(0, 150):
     morada = cidades[randint(0, len(cidades) - 1)]
     instanteChamada = randint(1451606400,1546300799)
 
-    eventos.append('insert into eventoEmergencia values(' + str(numTelefone) + ', ' + str(instanteChamada) + ', \'' + nome + '\', \'' + morada + '\', ' + str(numProcessoSocorro) + ');')
+    timeStampInicio = toTimestamp(instanteChamada)
+    eventos.append('insert into eventoEmergencia values(' + str(numTelefone) + ', ' + timeStampInicio + ', \'' + nome + '\', \'' + morada + '\', ' + str(numProcessoSocorro) + ');')
 
     numTelefone += 1
     numProcessoSocorro += 1
@@ -231,7 +244,10 @@ for i in range (0, 102):
     dataAuditoria = dataHoraInicio
     accionamento = accionamentos[randint(0, len(accionamentos) - 1)]
 
-    audita.append('insert into audita values(' + str(i) + ', ' + accionamento + ', ' + str(dataHoraInicio) + ', ' + str(dataHoraFim) + ', ' + str(dataAuditoria) + ', \'' + texto + '\');')
+    timeStampInicio = toTimestamp(dataHoraInicio)
+    timeStampFim = toTimestamp(dataHoraFim)
+
+    audita.append('insert into audita values(' + str(i) + ', ' + accionamento + ', ' + timeStampInicio + ', ' + timeStampFim + ', ' + timeStampInicio + ', \'' + texto + '\');')
 
 
 
@@ -244,7 +260,10 @@ for i in range (0, 102):
     dataHoraFim = dataHoraInicio + randint(120, 1200)
     video = todosVideos[randint(0, len(todosVideos) - 1)]
 
-    solicita.append('insert into solicita values(' + str(i) + ', ' + video + ', ' + str(dataHoraInicio) + ', ' + str(dataHoraFim) + ');')
+    timeStampInicio = toTimestamp(dataHoraInicio)
+    timeStampFim = toTimestamp(dataHoraInicio)
+
+    solicita.append('insert into solicita values(' + str(i) + ', ' + video + ', ' + timeStampInicio + ', ' + timeStampFim + ');')
 
 
 
@@ -340,13 +359,6 @@ def printAll():
 
     for x in solicita:
         print(x)
-
-
-
-def toTimestamp(timestamp):
-    string = datetime.datetime.fromtimestamp(timestamp)
-
-    return '\'' + string.strftime('%Y-%m-%d %H:%M:%S') + '\''
 
     
 
