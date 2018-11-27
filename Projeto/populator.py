@@ -63,16 +63,16 @@ for i in range (0, 102):
     camaras.append('insert into camara values(' + str(i) + ');')
 
     j = 0
-    while j < 4:
+    numVideos = randint(2,4)
+    while j < numVideos:
         dataHoraInicio = randint(1451606400, 1546300799) # 2016 <= dataHoraInicio <= 2018
         duracao = randint(10, 30)
         dataHoraFim = dataHoraInicio + duracao*60
-        numCamara = randint(1, 100)
 
         if (dataHoraInicio not in used):
             used.append(dataHoraInicio)
-            todosVideos.append(str(dataHoraInicio) + ', ' + str(numCamara))
-            videos.append('insert into video values(' + str(dataHoraInicio) + ', ' + str(dataHoraFim) + ', ' + str(numCamara) + ');')
+            todosVideos.append(str(dataHoraInicio) + ', ' + str(i))
+            videos.append('insert into video values(' + str(dataHoraInicio) + ', ' + str(dataHoraFim) + ', ' + str(i) + ');')
             numSegmentos = randint(1, 2)
 
             for k in range (0, numSegmentos):
@@ -85,7 +85,7 @@ for i in range (0, 102):
                 else:
                     duracaoSegmento = duracao
 
-                segmentos.append('insert into segmentoVideo values(' + str(numSegmento) + ', ' + str(duracaoSegmento) + ', ' + str(dataHoraInicio) + ', ' + str(numCamara) + ');')
+                segmentos.append('insert into segmentoVideo values(' + str(numSegmento) + ', ' + str(duracaoSegmento) + ', ' + str(dataHoraInicio) + ', ' + str(i) + ');')
                 dataHoraInicio += duracaoSegmento*60
 
             j += 1
@@ -109,17 +109,16 @@ for i in range(0, 102):
 #-----------------------------------------
 
 numTelefone = 960000000
-instanteChamada = 1451606400
 numProcessoSocorro = 0
 
 for i in range(0, 150):
     nome = nomes[randint(0, len(nomes) - 1)]
     morada = cidades[randint(0, len(cidades) - 1)]
+    instanteChamada = randint(1451606400,1546300799)
 
     eventos.append('insert into eventoEmergencia values(' + str(numTelefone) + ', ' + str(instanteChamada) + ', \'' + nome + '\', \'' + morada + '\', ' + str(numProcessoSocorro) + ');')
 
     numTelefone += 1
-    instanteChamada += randint(0,1000000)
     numProcessoSocorro += 1
     numProcessoSocorro = numProcessoSocorro % 102   #Numero de processos socorro
 
@@ -173,13 +172,11 @@ for nomeEntidade in todasEntidades:
             meiosCombate.append('insert into meioCombate values(' + str(i) + ', \'' + nomeEntidade + '\');')
 
         elif i % 3 == 1:
-            meio = str(i) + ', \'' + nomeEntidade
             todosMeiosApoio.append(meio)
 
             meiosApoio.append('insert into meioApoio values(' + meio + '\');')
 
         else:
-            meio = str(i) + ', \'' + nomeEntidade
             todosMeiosSocorro.append(meio)
 
             meiosSocorro.append('insert into meioSocorro values(' + meio + '\');')
