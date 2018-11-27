@@ -13,14 +13,14 @@ cidades = ["Portimão", "Vila Real", "Bragança", "Viana do Castelo", "Alcobaça
         "Tavira", "Trancoso", "Trofa", "Lisboa", "Porto", "Braga", "Coimbra", 
         "Amadora", "Vila Nova de Gaia", "Setúbal", "Beja", "Évora", "Faro", "Sines", 
         "Monchique", "Viseu", "Montijo", "Alcochete", "Oliveira do Hospital", "Albufeira", "Olhão", 
-        "Redondo", "Vila das Aves", "Abrantes", "Águeda", "Alcácer do Sal", "Alcobaça", "Alfena", 
-        "Chaves", "Costa da Caparica", "Cartaxo", "Esmoriz", "Estarreja",
-        "Fafe", "Santo André", "Felgueiras", "Fátima", "Funchal", "Gondomar", "Nazaré", 
+        "Redondo", "Vila das Aves", "Abrantes", "Águeda", "Alcácer do Sal", "Alfena", 
+        "Costa da Caparica", "Esmoriz", "Estarreja",
+        "Fafe", "Santo André", "Felgueiras", "Gondomar", "Nazaré", 
         "Horta", "Lagoa", "Lagos", "Sagres", "Loulé", "Castro Daire", "Marco de Canavezes", 
         "Montemor-o-Novo", "Ovar", "Peniche", "Ericeira", "Pombal", "Cascais", 
-        "Rio Maior", "Sabugal", "Santana", "Santo Tirso", "Seixal", "Silves", "Tondela", 
+        "Rio Maior", "Sabugal", "Santo Tirso", "Seixal", "Silves", "Tondela", 
         "Valongo", "Vizela", "Ílhavo", "Lamego", "Lixa", "Lourosa", "Macedo de Cavaleiros",
-        "Machico"]
+        "Machico", "Mões", "Alvor", "Arcozelo", "Coina", "Marzovelos", "Póvoa de Varzim"]
 
 nomes = ["João", "Joana", "Maria", "Rita", "Miguel", 
         "Simão", "Catarina", "Ana", "Luís", "Tomás", 
@@ -296,12 +296,12 @@ def printAll():
 
     print('\n\n')
 
-    for x in eventos:
+    for x in processos:
         print(x)
 
     print('\n\n')
 
-    for x in processos:
+    for x in eventos:
         print(x)
 
     print('\n\n')
