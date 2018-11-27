@@ -3,6 +3,7 @@
 #---------------------------------------------------------------
 
 from random import randint
+import datetime
 
 cidades = ["Portimão", "Vila Real", "Bragança", "Viana do Castelo", "Alcobaça", "Sintra", 
         "Funchal", "Portalegre", "Aveiro", "Almada", "Barreiro", "Cartaxo", "Elvas", 
@@ -340,8 +341,13 @@ def printAll():
     for x in solicita:
         print(x)
 
-    
-    
 
+
+def toTimestamp(timestamp):
+    string = datetime.datetime.fromtimestamp(timestamp)
+
+    return '\'' + string.strftime('%Y-%m-%d %H:%M:%S') + '\''
+
+    
 
 printAll()
