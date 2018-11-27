@@ -260,7 +260,8 @@ for i in range (0, 102):
     video = todosVideos[randint(0, len(todosVideos) - 1)]
 
     timeStampInicio = toTimestamp(dataHoraInicio)
-    timeStampFim = toTimestamp(dataHoraInicio)
+    timeStampFim = toTimestamp(dataHoraFim)
+    # timeStampVideo = toTimestamp(video)
 
     solicita.append('insert into solicita values(' + str(i) + ', ' + video + ', ' + timeStampInicio + ', ' + timeStampFim + ');')
 
