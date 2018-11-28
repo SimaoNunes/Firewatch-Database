@@ -181,15 +181,15 @@ for nomeEntidade in todasEntidades:
 
         meios.append('insert into meio values(' + str(i) + ', \'' + nomesMeios[randint(0, len(nomesMeios) - 1)] + '\', \'' + nomeEntidade + '\');')
 
-        if i % 3 == 0:
+        if i % 3 == 0 or randint(0, 14) == 0:
             meiosCombate.append('insert into meioCombate values(' + str(i) + ', \'' + nomeEntidade + '\');')
 
-        elif i % 3 == 1:
+        if i % 3 == 1 or randint(0, 14) == 0:
             todosMeiosApoio.append(meio)
 
             meiosApoio.append('insert into meioApoio values(' + meio + '\');')
 
-        else:
+        if i % 3 == 2 or randint(0, 14) == 0:
             todosMeiosSocorro.append(meio)
 
             meiosSocorro.append('insert into meioSocorro values(' + meio + '\');')
