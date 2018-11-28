@@ -67,8 +67,8 @@
             header("Refresh:0");
         }
 
-        if(isset($_REQUEST['m'])){
-            $apagar = $_REQUEST['m'];    
+        if(isset($_REQUEST['rem'])){
+            $apagar = $_REQUEST['rem'];    
 
             $host = "db.ist.utl.pt";
             $user ="ist186512";
@@ -84,6 +84,10 @@
             $result->execute([':apagar'=> $apagar]);
         
             $db = null;
+
+            $newURL = 'http://web.tecnico.ulisboa.pt/~ist186512/projects/database/1/Locais/locais.php';
+            header('Location: '.$newURL);
+
         }
         ?>
 
@@ -120,7 +124,7 @@
                     echo($row['moradalocal']);
                     echo("</td>");
                     echo("<td>");
-                    echo("<a href='locais.php?m={$row['moradalocal']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
+                    echo("<a href='locais.php?rem={$row['moradalocal']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
                     echo("</td>");
                     echo("<tr>");
                 }
