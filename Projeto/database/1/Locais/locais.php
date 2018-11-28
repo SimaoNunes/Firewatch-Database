@@ -38,22 +38,70 @@
         
         <div class="centered">
             <h3>Inserir Local</h3>
-            <form action='index.php' method='post'>
+            <form action='locais.php' method='post'>
                 <h6>Morada: <input type='text' name='morada'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
             </form>
         </div>
 
+        <?php 
+
+        if(isset($_REQUEST['morada'])){
+            $novo_local = $_REQUEST['morada'];    
+
+            $host = "db.ist.utl.pt";
+            $user ="ist186512";
+            $password = "fico6299";
+            $dbname = $user;
+        
+            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+            $sql = "INSERT INTO local  (moradalocal) VALUES (:novolocal);";
+        
+            $result = $db->prepare($sql);
+            $result->execute([':novolocal'=> $novo_local]);
+        
+            $db = null;
+
+            header("Refresh:0");
+        }
+
+        if(isset($_REQUEST['rem'])){
+            $apagar = $_REQUEST['rem'];    
+
+            $host = "db.ist.utl.pt";
+            $user ="ist186512";
+            $password = "fico6299";
+            $dbname = $user;
+        
+            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+            $sql = "DELETE FROM local WHERE moradalocal = (:apagar);";
+        
+            $result = $db->prepare($sql);
+            $result->execute([':apagar'=> $apagar]);
+        
+            $db = null;
+
+            $newURL = 'http://web.tecnico.ulisboa.pt/~ist186512/projects/database/1/Locais/locais.php';
+            header('Location: '.$newURL);
+
+        }
+        ?>
+
         <div class="container">
+            
             <table class="table col-md-6">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Morada</th>
                     <th scope="col">Remover</th>
                 </tr>
                 </thead>
                 <tbody>
+
                 <?php
 
                 $host = "db.ist.utl.pt";
@@ -64,25 +112,21 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "SELECT moradalocal FROM local;";
+                $sql = "SELECT moradalocal FROM local ORDER BY moradalocal ASC;";
+
                 $result = $db->prepare($sql);
                 $result->execute();
 
-                $count = 0;
                 foreach($result as $row)
                 {
                     echo("<tr>");
                     echo("<td>");
-                    echo($count);
-                    echo("</td>");
-                    echo("<td>");
                     echo($row['moradalocal']);
                     echo("</td>");
                     echo("<td>");
-                    echo("<img width='20' src='https://goo.gl/uJnJJD'>");
+                    echo("<a href='locais.php?rem={$row['moradalocal']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
                     echo("</td>");
                     echo("<tr>");
-                    $count = $count + 1;
                 }
         
                 $db = null;
