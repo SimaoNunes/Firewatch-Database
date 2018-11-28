@@ -214,7 +214,8 @@ for i in range(0, 102):
 accionamentos = []
 
 for i in range(0, 102):
-    for j in range(0,3):
+    numMeios = randint(1, 5)
+    for j in range(0,numMeios):
         accionamento = todosMeios[(i+j) % len(todosMeios)] + '\', ' + str(i)
         accionamentos.append(accionamento)
 
