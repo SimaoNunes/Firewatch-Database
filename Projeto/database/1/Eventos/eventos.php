@@ -52,7 +52,6 @@
             <table class="table col-md-12">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">Instante</th>
                     <th scope="col">Nome</th>
@@ -76,13 +75,9 @@
                 $result = $db->prepare($sql);
                 $result->execute();
 
-                $count = 0;
                 foreach($result as $row)
                 {
                     echo("<tr>");
-                    echo("<td>");
-                    echo($count);
-                    echo("</td>");
                     echo("<td>");
                     echo($row['numtelefone']);
                     echo("</td>");
@@ -102,7 +97,6 @@
                     echo("<img width='20' src='https://goo.gl/uJnJJD'>");
                     echo("</td>");
                     echo("<tr>");
-                    $count = $count + 1;
                 }
         
                 $db = null;

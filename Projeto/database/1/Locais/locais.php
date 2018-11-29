@@ -85,7 +85,7 @@
         
             $db = null;
 
-            $newURL = 'http://web.tecnico.ulisboa.pt/~ist186512/projects/database/1/Locais/locais.php';
+            $newURL = 'locais.php';
             header('Location: '.$newURL);
 
         }

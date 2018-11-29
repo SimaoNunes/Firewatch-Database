@@ -76,14 +76,12 @@
         }
         
 
-        if(isset($_REQUEST['remN']) and isset($_REQUEST['remNome']) and isset($_REQUEST['remEnt'])){
+        if(isset($_REQUEST['remN'])){
           
             $apagarN    = $_REQUEST['remN'];
-            $apagarNome = $_REQUEST['remNome'];
             $apagarEnt  = $_REQUEST['remEnt'];    
 
             echo($apagarN);
-            echo($apagarNome);
             echo($apagarEnt);
 
             $host = "db.ist.utl.pt";
@@ -94,18 +92,16 @@
             $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-            $sql = "DELETE FROM local WHERE ( nummeio = (:apagarN) AND nomeentidade = (:apagarNome) AND  nomeentidade = (:apagarEntidade);";
-        
-            $result->bindParam(':apagarN', $apagarN);
-            $result->bindParam(':apagarNome', $apagarNome);
-            $result->bindParam(':apagarEntidade', $apagarEnt);
+            $sql = "DELETE FROM meio WHERE nummeio = :apagarN AND nomeentidade = :apagarEntidade;";
 
             $result = $db->prepare($sql);
-            $result->execute();
+            $result->execute([':apagarN' => $apagarN, 'apagarEntidade' => $apagarEnt]);
         
             $db = null;
 
-            $newURL = 'http://web.tecnico.ulisboa.pt/~ist186512/projects/database/1/Meios/Meios.php';
+            echo('deu');
+
+            $newURL = 'meios.php';
             header('Location: '.$newURL);
 
         }
@@ -151,7 +147,7 @@
                     echo($row['nomeentidade']);
                     echo("</td>");
                     echo("<td>");
-                    echo("<a href='meios.php?remN={$row['nummeio']}?remNome={$row['nomemeio']}?remEnt={$row['nomeentidade']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
+                    echo("<a href='meios.php?remN={$row['nummeio']}&remEnt={$row['nomeentidade']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
                     echo("</td>");
                     echo("<tr>");
                 }
