@@ -44,11 +44,57 @@
             </form>
         </div>
 
+        <?php 
+
+        if(isset($_REQUEST['n'])){
+            $novo_n = $_REQUEST['n'];    
+
+            $host = "db.ist.utl.pt";
+            $user ="ist186512";
+            $password = "fico6299";
+            $dbname = $user;
+
+            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "INSERT INTO local (processosocorro) VALUES (:novo_n);";
+
+            $result = $db->prepare($sql);
+            $result->execute([':novo_n'=> $novo_n]);
+
+            $db = null;
+
+            header("Refresh:0");
+        }
+
+        if(isset($_REQUEST['rem'])){
+            $apagar = $_REQUEST['rem'];    
+
+            $host = "db.ist.utl.pt";
+            $user ="ist186512";
+            $password = "fico6299";
+            $dbname = $user;
+
+            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "DELETE FROM local WHERE precessosocorro = (:apagar);";
+
+            $result = $db->prepare($sql);
+            $result->execute([':apagar'=> $apagar]);
+
+            $db = null;
+
+            $newURL = 'locais.php';
+            header('Location: '.$newURL);
+
+        }
+        ?>
+
         <div class="container">
             <table class="table col-md-6">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Número</th>
                     <th scope="col">Remover</th>
                 </tr>
@@ -68,21 +114,16 @@
                 $result = $db->prepare($sql);
                 $result->execute();
 
-                $count = 0;
                 foreach($result as $row)
                 {
                     echo("<tr>");
                     echo("<td>");
-                    echo($count);
-                    echo("</td>");
-                    echo("<td>");
                     echo($row['numprocessosocorro']);
                     echo("</td>");
                     echo("<td>");
-                    echo("<img width='20' src='https://goo.gl/uJnJJD'>");
+                    echo("<a href='locais.php?rem={$row['numprocessosocorro']}'><img width='20' src='https://goo.gl/uJnJJD'>");
                     echo("</td>");
                     echo("<tr>");
-                    $count = $count + 1;
                 }
         
                 $db = null;
