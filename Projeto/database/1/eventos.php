@@ -56,7 +56,7 @@
             $instante = str_replace("T"," ",$_REQUEST['instante']);
             $nome     = $_REQUEST['nome'];
             $morada   = $_REQUEST['morada'];
-            $num      = $_REQUEST['num'];
+            $num      = $_REQUEST['n'];
 
             $host = "db.ist.utl.pt";
             $user ="ist186512";
@@ -127,7 +127,7 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "SELECT numtelefone, instantechamada, nomepessoa, moradalocal, numprocessosocorro FROM eventoemergencia ORDER BY instantechamada ASC;";
+                $sql = "SELECT numtelefone, instantechamada, nomepessoa, moradalocal, numprocessosocorro FROM eventoemergencia ORDER BY numprocessosocorro ASC;";
                 $result = $db->prepare($sql);
                 $result->execute();
 
