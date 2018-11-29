@@ -48,6 +48,40 @@
             </form>
         </div>
 
+        <?php 
+
+        if(isset($_REQUEST['tlfn']) and isset($_REQUEST['instante']) and isset($_REQUEST['nome']) and isset($_REQUEST['morada']) and isset($_REQUEST['n'])){
+        
+            $tlfn     = $_REQUEST['tlfn']; 
+            $instante = $_REQUEST['instante'];
+            $nome     = $_REQUEST['nome'];
+            $morada   = $_REQUEST['morada'];
+            $num      = $_REQUEST['num'];
+
+            $host = "db.ist.utl.pt";
+            $user ="ist186512";
+            $password = "fico6299";
+            $dbname = $user;
+
+            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "INSERT INTO eventoemergencia (numtelefone,instantechamada,nomepessoa,moradalocal,numprocessosocorro) VALUES (:tlfn,:inst,:nome,:morada,:n);";
+
+            $result = $db->prepare($sql);
+            $result->bindParam(':num', $num);
+            $result->bindParam(':nome', $name);
+            $result->bindParam(':entidade', $ent);
+            $result->execute();
+
+            $db = null;
+
+            header("Refresh:0");
+        }
+
+        ?>
+
+
         <div class="container">
             <table class="table col-md-12">
                 <thead class="thead-dark">

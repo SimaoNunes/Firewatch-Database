@@ -57,7 +57,7 @@
             $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql = "INSERT INTO local (processosocorro) VALUES (:novo_n);";
+            $sql = "INSERT INTO processosocorro (numprocessosocorro) VALUES (:novo_n);";
 
             $result = $db->prepare($sql);
             $result->execute([':novo_n'=> $novo_n]);
@@ -78,14 +78,14 @@
             $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql = "DELETE FROM local WHERE precessosocorro = (:apagar);";
+            $sql = "DELETE FROM processosocorro WHERE numprecessosocorro = (:apagar);";
 
             $result = $db->prepare($sql);
             $result->execute([':apagar'=> $apagar]);
 
             $db = null;
 
-            $newURL = 'locais.php';
+            $newURL = 'processos.php';
             header('Location: '.$newURL);
 
         }
@@ -121,7 +121,7 @@
                     echo($row['numprocessosocorro']);
                     echo("</td>");
                     echo("<td>");
-                    echo("<a href='locais.php?rem={$row['numprocessosocorro']}'><img width='20' src='https://goo.gl/uJnJJD'>");
+                    echo("<a href='processos.php?rem={$row['numprocessosocorro']}'><img width='20' src='https://goo.gl/uJnJJD'>");
                     echo("</td>");
                     echo("<tr>");
                 }
