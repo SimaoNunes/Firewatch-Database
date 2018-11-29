@@ -47,8 +47,8 @@
         <?php 
 
         if(isset($_REQUEST['morada'])){
-            // try
-            // {
+            try
+            {
                 $novo_local = $_REQUEST['morada'];    
 
                 $host = "db.ist.utl.pt";
@@ -67,11 +67,11 @@
                 $result->execute([':novolocal'=> $novo_local]);
             
                 $db = null;
-            // }
-            // catch (PDOException $e))
-            // {
-            //     echo("<p>ERROR: {$e->getMessage()}</p>");
-            // }
+            }
+            catch (PDOException $e)
+            {
+                echo("<p>ERROR: {$e->getMessage()}</p>");
+            }
             header("Refresh:0");
         }
 
