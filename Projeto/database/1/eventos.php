@@ -40,10 +40,10 @@
             <h3>Inserir Evento de Emergência</h3>
             <form action='index.php' method='post'>
                 <h6>Telefone: <input type='text' name='tlfn'/></h6>
-                <h6>Instante de Chamada: <input type='text' name='instante'/></h6>
+                <h6>Instante de Chamada: <input type='datetime-local' name='instante'/></h6>
                 <h6>Nome da Pessoa: <input type='text' name='nome'/></h6>
                 <h6>Morada: <input type='text' name='morada'/></h6>
-                <h6>Nº processo: <input type='text' name='n'/></h6>
+                <h6>Nº processo: <input type='number' name='n'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
             </form>
         </div>
@@ -69,10 +69,7 @@
             $sql = "INSERT INTO eventoemergencia (numtelefone,instantechamada,nomepessoa,moradalocal,numprocessosocorro) VALUES (:tlfn,:inst,:nome,:morada,:n);";
 
             $result = $db->prepare($sql);
-            $result->bindParam(':num', $num);
-            $result->bindParam(':nome', $name);
-            $result->bindParam(':entidade', $ent);
-            $result->execute();
+            $result->execute([':tlfn' => $tlfn, ':inst' => $instante, ':nome' => $nome, ':morada' => $morada, ':n' => $num]);
 
             $db = null;
 
