@@ -63,12 +63,6 @@
             $password = "fico6299";
             $dbname = $user;
 
-            echo($tlfn);
-            echo($instante);
-            echo($nome);
-            echo($morada);
-            echo($num);
-
             $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
