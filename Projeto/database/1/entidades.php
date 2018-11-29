@@ -92,7 +92,7 @@
 
             $db = null;
 
-            $newURL = 'http://web.tecnico.ulisboa.pt/~ist186512/projects/database/1/Entidades/entidades.php';
+            $newURL = 'entidades.php';
             header('Location: '.$newURL);
 
         }
