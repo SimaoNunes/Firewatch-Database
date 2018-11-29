@@ -67,12 +67,12 @@
                 $result->execute([':novolocal'=> $novo_local]);
             
                 $db = null;
+                header("Refresh:0");
             }
-            catch (PDOException $e))
+            catch (PDOException $e)
             {
-                echo("<p>ERROR: {$e->getMessage()}</p>");
+                echo("<div class='centered'><h6>ERRO: Local já existe</h6></div>");
             }
-            header("Refresh:0");
         }
 
         if(isset($_REQUEST['rem'])){
