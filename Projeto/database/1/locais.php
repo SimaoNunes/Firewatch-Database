@@ -47,23 +47,31 @@
         <?php 
 
         if(isset($_REQUEST['morada'])){
-            $novo_local = $_REQUEST['morada'];    
+            try
+            {
+                $novo_local = $_REQUEST['morada'];    
 
-            $host = "db.ist.utl.pt";
-            $user ="ist186512";
-            $password = "fico6299";
-            $dbname = $user;
-        
-            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-            $sql = "INSERT INTO local  (moradalocal) VALUES (:novolocal);";
-        
-            $result = $db->prepare($sql);
-            $result->execute([':novolocal'=> $novo_local]);
-        
-            $db = null;
+                $host = "db.ist.utl.pt";
+                $user ="ist186512";
+                $password = "fico6299";
+                $dbname = $user;
+            
+                $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+
+            
+                $sql = "INSERT INTO local  (moradalocal) VALUES (:novolocal);";
+            
+                $result = $db->prepare($sql);
+                $result->execute([':novolocal'=> $novo_local]);
+            
+                $db = null;
+            }
+            catch (PDOException $e))
+            {
+                echo("<p>ERROR: {$e->getMessage()}</p>");
+            }
             header("Refresh:0");
         }
 
