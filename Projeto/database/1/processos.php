@@ -39,32 +39,39 @@
         <div class="centered">
             <h3>Inserir Processo</h3>
             <form action='processos.php' method='post'>
-                <h6>Número: <input type='text' name='n'/></h6>
-                <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
+                <h6>Número: <input type='number' name='n' min='0' required='required'/></h6>
+                <h6><input class="btn btn-success" type="submit" value="Submit"/></h6>
             </form>
         </div>
 
         <?php 
 
         if(isset($_REQUEST['n'])){
-            $novo_n = $_REQUEST['n'];    
+            try
+            {       
+                $novo_n = $_REQUEST['n'];    
 
-            $host = "db.ist.utl.pt";
-            $user ="ist186512";
-            $password = "fico6299";
-            $dbname = $user;
+                $host = "db.ist.utl.pt";
+                $user ="ist186512";
+                $password = "fico6299";
+                $dbname = $user;
 
-            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql = "INSERT INTO processosocorro (numprocessosocorro) VALUES (:novo_n);";
+                $sql = "INSERT INTO processosocorro (numprocessosocorro) VALUES (:novo_n);";
 
-            $result = $db->prepare($sql);
-            $result->execute([':novo_n'=> $novo_n]);
+                $result = $db->prepare($sql);
+                $result->execute([':novo_n'=> $novo_n]);
 
-            $db = null;
+                $db = null;
 
-            header("Refresh:0");
+                header("Refresh:0");
+            }
+            catch (PDOException $e)
+            {
+                echo("<div class='centered'><h6>ERRO: Processo já existe</h6></div>");
+            }
         }
 
         if(isset($_REQUEST['rem'])){
