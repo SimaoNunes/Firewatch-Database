@@ -68,7 +68,7 @@
         }
 
         if(isset($_REQUEST['rem'])){
-            $apagar = $_REQUEST['rem'];    
+            $apagar = $_REQUEST['rem'];
 
             $host = "db.ist.utl.pt";
             $user ="ist186512";
@@ -78,10 +78,12 @@
             $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql = "DELETE FROM processosocorro WHERE numprecessosocorro = (:apagar);";
+            $sql = "DELETE FROM processosocorro WHERE numprocessosocorro = :apagar;";
 
             $result = $db->prepare($sql);
             $result->execute([':apagar'=> $apagar]);
+
+            echo('entrei');
 
             $db = null;
 
