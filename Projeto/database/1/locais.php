@@ -39,7 +39,7 @@
         <div class="centered">
             <h3>Inserir Local</h3>
             <form action='locais.php' method='post'>
-                <h6>Morada: <input type='text' name='morada'/></h6>
+                <h6>Morada: <input type='text' name='morada' required='required'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
             </form>
         </div>
@@ -67,7 +67,7 @@
                 $result->execute([':novolocal'=> $novo_local]);
             
                 $db = null;
-                
+
                 header("Refresh:0");
             }
             catch (PDOException $e)

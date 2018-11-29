@@ -39,33 +39,39 @@
         <div class="centered">
             <h3>Inserir Entidade</h3>
             <form action='entidades.php' method='post'>
-                <h6>Nome: <input type='text' name='nome'/></h6>
-                <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
+                <h6>Nome: <input type='text' name='nome' pattern='[A-Za-z0-9]{1,20}' required='required'/></h6>
+                <h6><input class="btn btn-success" type="submit" value="Submit"/></h6>
             </form>
         </div>
 
         <?php 
 
         if(isset($_REQUEST['nome'])){
+            try
+            {     
+                $nova_entidade = $_REQUEST['nome'];    
 
-            $nova_entidade = $_REQUEST['nome'];    
+                $host = "db.ist.utl.pt";
+                $user ="ist186512";
+                $password = "fico6299";
+                $dbname = $user;
 
-            $host = "db.ist.utl.pt";
-            $user ="ist186512";
-            $password = "fico6299";
-            $dbname = $user;
+                $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql = "INSERT INTO entidademeio (nomeentidade) VALUES (:novaentidade);";
 
-            $sql = "INSERT INTO entidademeio (nomeentidade) VALUES (:novaentidade);";
+                $result = $db->prepare($sql);
+                $result->execute([':novaentidade'=> $nova_entidade]);
 
-            $result = $db->prepare($sql);
-            $result->execute([':novaentidade'=> $nova_entidade]);
+                $db = null;
 
-            $db = null;
-
-            header("Refresh:0");
+                header("Refresh:0");
+            }
+                catch (PDOException $e)
+            {
+                echo("<div class='centered'><h6>ERRO: Entidade já existe</h6></div>");
+            }
         }
 
         if(isset($_REQUEST['rem'])){
@@ -86,7 +92,7 @@
 
             $db = null;
 
-            $newURL = 'http://web.tecnico.ulisboa.pt/~ist186512/projects/database/1/Entidades/entidades.php';
+            $newURL = 'entidades.php';
             header('Location: '.$newURL);
 
         }
