@@ -38,7 +38,7 @@
         
         <div class="centered">
             <h3>Inserir Processo</h3>
-            <form action='index.php' method='post'>
+            <form action='processos.php' method='post'>
                 <h6>Número: <input type='text' name='n'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
             </form>
