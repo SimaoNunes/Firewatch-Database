@@ -39,9 +39,9 @@
         <div class="centered">
             <h3>Inserir Meio</h3>
             <form action='meios.php' method='post'>
-                <h6>Nº: <input type='number' name='n' min='0' require/></h6>
-                <h6>Nome: <input type='text' name='nome' require/></h6>
-                <h6>Entidade: <input type='text' name='entidade' require/></h6>
+                <h6>Nº: <input type='number' name='n' min='0' required='required'/></h6>
+                <h6>Nome: <input type='text' name='nome' required='required'/></h6>
+                <h6>Entidade: <input type='text' name='entidade' required='required'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
             </form>
         </div>
