@@ -71,7 +71,7 @@
             }
             catch (PDOException $e)
             {
-                echo("<p>ERRO: Local já existe</p>");
+                echo("<div class='centered'><h6>ERRO: Local já existe</h6></div>");
             }
         }
 
