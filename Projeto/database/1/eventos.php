@@ -39,11 +39,11 @@
         <div class="centered">
             <h3>Inserir Evento de Emergência</h3>
             <form action='eventos.php' method='post'>
-                <h6>Telefone: <input type='text' name='tlfn'/></h6>
-                <h6>Instante de Chamada: <input type='datetime-local' step='1' name='instante'/></h6>
-                <h6>Nome da Pessoa: <input type='text' name='nome'/></h6>
-                <h6>Morada: <input type='text' name='morada'/></h6>
-                <h6>Nº processo: <input type='number' name='n'/></h6>
+                <h6>Telefone: <input type='text' name='tlfn' required='required'/></h6>
+                <h6>Instante de Chamada: <input type='datetime-local' step='1' name='instante' required='required'/></h6>
+                <h6>Nome da Pessoa: <input type='text' name='nome' required='required'/></h6>
+                <h6>Morada: <input type='text' name='morada' required='required'/></h6>
+                <h6>Nº Processo: <input type='number' name='n' min='0' required='required'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
             </form>
         </div>
