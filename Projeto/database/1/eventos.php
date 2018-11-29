@@ -76,6 +76,31 @@
             header("Refresh:0");
         }
 
+        if(isset($_REQUEST['remNumTel'])){
+          
+            $apagarNumTel    = $_REQUEST['remNumTel'];
+            $apagarInstante  = $_REQUEST['remInstante'];
+
+            $host = "db.ist.utl.pt";
+            $user ="ist186512";
+            $password = "fico6299";
+            $dbname = $user;
+        
+            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+            $sql = "DELETE FROM eventoemergencia WHERE numtelefone = :apagarNumTel AND instantechamada = :apagarInstante;";
+
+            $result = $db->prepare($sql);
+            $result->execute([':apagarNumTel' => $apagarNumTel, 'apagarInstante' => $apagarInstante]);
+        
+            $db = null;
+
+            $newURL = 'eventos.php';
+            header('Location: '.$newURL);
+
+        }
+
         ?>
 
 
@@ -125,7 +150,7 @@
                     echo($row['numprocessosocorro']);
                     echo("</td>");
                     echo("<td>");
-                    echo("<img width='20' src='https://goo.gl/uJnJJD'>");
+                    echo("<a href='eventos.php?remNumTel={$row['numtelefone']}&remInstante={$row['instantechamada']}'><img width='20' src='https://goo.gl/uJnJJD'>");
                     echo("</td>");
                     echo("<tr>");
                 }

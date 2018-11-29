@@ -68,6 +68,7 @@ CREATE TABLE eventoEmergencia(
     moradaLocal VARCHAR(255),
     numProcessoSocorro INT NOT NULL,
     PRIMARY KEY(numTelefone, instanteChamada),
+    UNIQUE(nomePessoa, moradaLocal),
     FOREIGN KEY(moradaLocal) REFERENCES local(moradaLocal) ON DELETE CASCADE,
     FOREIGN KEY(numProcessoSocorro) REFERENCES processoSocorro(numProcessoSocorro) ON DELETE CASCADE
 );
