@@ -67,6 +67,7 @@
                 $result->execute([':novolocal'=> $novo_local]);
             
                 $db = null;
+                
                 header("Refresh:0");
             }
             catch (PDOException $e)

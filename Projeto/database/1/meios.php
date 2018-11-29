@@ -49,30 +49,38 @@
         <?php 
 
         if(isset($_REQUEST['n']) and isset($_REQUEST['nome']) and isset($_REQUEST['entidade'])){
-           
-            $num  = $_REQUEST['n']; 
-            $name = $_REQUEST['nome'];
-            $ent  = $_REQUEST['entidade'];
+            try
+            {           
+                $num  = $_REQUEST['n']; 
+                $name = $_REQUEST['nome'];
+                $ent  = $_REQUEST['entidade'];
 
-            $host = "db.ist.utl.pt";
-            $user ="ist186512";
-            $password = "fico6299";
-            $dbname = $user;
-        
-            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-            $sql = "INSERT INTO meio (nummeio,nomemeio,nomeentidade) VALUES (:num,:nome,:entidade);";
-        
-            $result = $db->prepare($sql);
-            $result->bindParam(':num', $num);
-            $result->bindParam(':nome', $name);
-            $result->bindParam(':entidade', $ent);
-            $result->execute();
-        
-            $db = null;
+                $host = "db.ist.utl.pt";
+                $user ="ist186512";
+                $password = "fico6299";
+                $dbname = $user;
+            
+                $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+                $sql = "INSERT INTO meio (nummeio,nomemeio,nomeentidade) VALUES (:num,:nome,:entidade);";
+            
+                $result = $db->prepare($sql);
+                $result->bindParam(':num', $num);
+                $result->bindParam(':nome', $name);
+                $result->bindParam(':entidade', $ent);
+                $result->execute();
+            
+                $db = null;
 
-            header("Refresh:0");
+                header("Refresh:0");
+            }
+            catch (PDOException $e)
+            {
+                $type = $e->getCode();
+                if($type == 23505) echo("<div class='centered'><h6>ERRO: Meio já existe</h6></div>");
+                else if($type == 23503) echo("<div class='centered'><h6>ERRO: Entidade não existe</h6></div>");
+            }
         }
         
 
