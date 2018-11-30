@@ -9,9 +9,10 @@
             body{
                 background-color: #474747;
             }
-            h3{
+            h2{
                 color: white;
                 text-align: center;
+                margin: 10;
             }
             h6{
                 color: white;
@@ -30,7 +31,11 @@
                 margin: 0 auto;
             }
             .centered{
-                margin: 20 auto;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
             }
             .leftie{
                 margin: 10 10;
@@ -38,21 +43,17 @@
         </style>
     </head>
     <body>
-
-    <?php 
-        echo($_REQUEST['type']);
-    ?>
         
         <div class="leftie">
             <a href="combate.php"><button type="button" class="btn btn-primary">Back</button></a>
         </div>
 
         <div class="centered">
-            <h3>Editar Meio de Combate:</h3>
+            <h2>Editar Meio de Combate:</h2>
             <form action='edit.php' method='post'>
-                <h6>Nº: <?php $_REQUEST['num']?> </h6>
+                <h6>Nº: <?php echo($_REQUEST['num'])?> </h6>
+                <h6>Entidade: <?php echo($_REQUEST['entidade'])?> </h6>
                 <h6>Novo Nome: <input type='text' name='new_name' required='required'/> </h6>
-                <h6>Entidade: <?php $_REQUEST['entidade']?> </h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"/> </h6>
             </form>
         </div>
