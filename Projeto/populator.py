@@ -241,7 +241,7 @@ for i in range (0, 102):
 texto = "Auditado."
 
 for i in range (0, 102):
-    dataHoraInicio = randint(1451606400, 1546300699)
+    dataHoraInicio = randint(1451606400, 1543604675)
     dataHoraFim = dataHoraInicio + randint(120, 1200)
     dataAuditoria = dataHoraInicio
     accionamento = accionamentos[randint(0, len(accionamentos) - 1)]
