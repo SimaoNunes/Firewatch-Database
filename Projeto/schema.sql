@@ -154,7 +154,7 @@ CREATE TABLE audita(
     FOREIGN KEY(idCoordenador) REFERENCES coordenador(idCoordenador) ON DELETE CASCADE
 );
 
- CREATE TABLE solicita(
+CREATE TABLE solicita(
     idCoordenador INT NOT NULL UNIQUE,
     dataHoraInicioVideo TIMESTAMP NOT NULL,
     numCamara INT NOT NULL,
