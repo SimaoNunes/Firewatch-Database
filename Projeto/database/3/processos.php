@@ -33,16 +33,23 @@
             .centered{
                 margin: 20 auto;
             }
+            .leftie{
+                margin: 10 10;
+            }
         </style>
     </head>
     <body>
+
+        <div class="leftie">
+            <a href='.'><button type="button" class="btn btn-primary">Back</button></a>
+        </div>
         
         <div class="centered">
             <h3>Processos</h3>
         </div>
 
         <div class="container">
-            <table class="table col-md-4">
+            <table class="table col-md-2">
                 <thead class="thead-dark">
                 <tr>
                     <th style="text-align:center" scope="col">Número</th>

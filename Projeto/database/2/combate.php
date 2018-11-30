@@ -45,7 +45,7 @@
 
         <div class="centered">
             <h3>Inserir Meio de Combate</h3>
-            <form action='meios.php' method='post'>
+            <form action='combate.php' method='post'>
                 <h6>Nº: <input type='number' name='n' min='0' required='required'/></h6>
                 <h6>Nome: <input type='text' name='nome' required='required'/></h6>
                 <h6>Entidade: <input type='text' name='entidade' required='required'/></h6>
@@ -70,11 +70,10 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "INSERT INTO meio (nummeio,nomemeio,nomeentidade) VALUES (:num,:nome,:entidade);";
+                $sql = "INSERT INTO meiocombate (nummeio,nomeentidade) VALUES (:num,:entidade);";
             
                 $result = $db->prepare($sql);
                 $result->bindParam(':num', $num);
-                $result->bindParam(':nome', $name);
                 $result->bindParam(':entidade', $ent);
                 $result->execute();
             
