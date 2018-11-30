@@ -44,7 +44,7 @@
         </div>
 
         <div class="centered">
-            <h3>Listar Meios por Processos</h3>
+            <h3>Listar Meios por Processo</h3>
             <form action='accionados.php' method='post'>
                 <h6>Nº Processo Socorro: <input type='number' name='n' min='0' required='required'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"/></h6>
