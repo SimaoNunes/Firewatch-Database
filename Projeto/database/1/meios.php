@@ -115,8 +115,6 @@
         
             $db = null;
 
-            echo('deu');
-
             $newURL = 'meios.php';
             header('Location: '.$newURL);
 
