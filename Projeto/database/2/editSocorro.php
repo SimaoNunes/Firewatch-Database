@@ -50,7 +50,7 @@
 
         <div class="centered">
             <h2>Editar Meio de Socorro:</h2>
-            <form action='editsocorro.php?num=<?php echo($_REQUEST['num'])?>&entidade=<?php echo($_REQUEST['entidade'])?>' method='post'>
+            <form action='editSocorro.php?num=<?php echo($_REQUEST['num'])?>&entidade=<?php echo($_REQUEST['entidade'])?>' method='post'>
                 <h6>Nº: <?php echo($_REQUEST['num'])?> </h6>
                 <h6>Entidade: <?php echo($_REQUEST['entidade'])?> </h6>
                 <h6>Nome: <?php echo($_REQUEST['nome'])?> </h6>
