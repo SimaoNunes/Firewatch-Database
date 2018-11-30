@@ -54,62 +54,66 @@
         <?php 
 
         if(isset($_REQUEST['n'])){
+                $n = $_REQUEST['n'];
 
-            $n = $_REQUEST['n'];
+                $host = 'db.ist.utl.pt';
+                $user ="ist186512";
+                $password = "fico6299";
+                $dbname = $user;
+            
+                $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $host = 'db.ist.utl.pt';
-            $user ="ist186512";
-            $password = "fico6299";
-            $dbname = $user;
-        
-            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-            $sql = "SELECT * FROM acciona NATURAL JOIN meio WHERE numprocessosocorro = :n;";
-            $result = $db->prepare($sql);
-            $result->execute([':n' => $n]);
-            $db = null;
+                $sql = "SELECT * FROM processosocorro WHERE numprocessosocorro = :n;";
 
-            if(count($result)!=0){
-                echo("<div class='container'>
-                        <table class='table col-md-8'>
-                        <thead class='thead-dark'>
-                        <tr>
-                            <th style='text-align:center' scope='col'>Nº Meio</th>
-                            <th style='text-align:center' scope='col'>Nome</th>
-                            <th style='text-align:center' scope='col'>Entidade</th>
-                            <th style='text-align:center' scope='col'>Nº Processo</th>
-                        </tr>
-                        </thead>
-                        <tbody>");
+                $result = $db->prepare($sql);
+                $result->execute([':n' => $n]);
+                $db = null;
+            
+                if($result==0){
+                    echo("<div class='centered'><h6>ERRO: Processo não existe</h6></div>");
+                }
+                else{
+                    $sql = "SELECT * FROM acciona NATURAL JOIN meio WHERE numprocessosocorro = :n;";
+                    $result = $db->prepare($sql);
+                    $result->execute([':n' => $n]);
+                    $db = null;
 
-                        foreach($result as $row)
-                        {
-                            echo("<tr>");
-                            echo("<td style='text-align:center'>");
-                            echo($row['nummeio']);
-                            echo("</td>");
-                            echo("<td style='text-align:center'>");
-                            echo($row['nomemeio']);
-                            echo("</td>");
-                            echo("<td style='text-align:center'>");
-                            echo($row['nomeentidade']);
-                            echo("</td>");
-                            echo("<td style='text-align:center'>");
-                            echo($row['numprocessosocorro']);
-                            echo("</td>");
-                            echo("<tr>");
-                        }
 
-                        echo("</tbody>
-                    </table>
-                </div>");
-            }else{
-                echo("<div class='container'>
-                    <h6>ERR: Não existe um Processo Socorro com o número inserido</h6>
-                </div>");
-            }
+                    echo("<div class='container'>
+                            <table class='table col-md-8'>
+                            <thead class='thead-dark'>
+                            <tr>
+                                <th style='text-align:center' scope='col'>Nº Meio</th>
+                                <th style='text-align:center' scope='col'>Nome</th>
+                                <th style='text-align:center' scope='col'>Entidade</th>
+                                <th style='text-align:center' scope='col'>Nº Processo</th>
+                            </tr>
+                            </thead>
+                            <tbody>");
 
+                            foreach($result as $row)
+                            {
+                                echo("<tr>");
+                                echo("<td style='text-align:center'>");
+                                echo($row['nummeio']);
+                                echo("</td>");
+                                echo("<td style='text-align:center'>");
+                                echo($row['nomemeio']);
+                                echo("</td>");
+                                echo("<td style='text-align:center'>");
+                                echo($row['nomeentidade']);
+                                echo("</td>");
+                                echo("<td style='text-align:center'>");
+                                echo($row['numprocessosocorro']);
+                                echo("</td>");
+                                echo("<tr>");
+                            }
+
+                            echo("</tbody>
+                        </table>
+                    </div>");
+                    }
         }
         
 
