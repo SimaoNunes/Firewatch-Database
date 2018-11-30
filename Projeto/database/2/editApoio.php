@@ -76,7 +76,7 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "UPDATE meio SET nomemeio = :new_name WHERE nummeio = :num AND nomeentidade = :entidade);";
+                $sql = "UPDATE meio SET nomemeio = :new_name WHERE nummeio = :num AND nomeentidade = :entidade;";
             
                 $result = $db->prepare($sql);
                 $result->execute([':new_name' => $new_name, ':num' => $num, ':entidade' => $ent]);

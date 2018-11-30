@@ -50,7 +50,7 @@
 
         <div class="centered">
             <h2>Editar Meio de Combate:</h2>
-            <form action='editCombate.php' method='post'>
+            <form action='editCombate.php?num=<?php echo($_REQUEST['num'])?>&entidade=<?php echo($_REQUEST['entidade'])?>' method='post'>
                 <h6>Nº: <?php echo($_REQUEST['num'])?> </h6>
                 <h6>Entidade: <?php echo($_REQUEST['entidade'])?> </h6>
                 <h6>Nome: <?php echo($_REQUEST['nome'])?> </h6>
@@ -61,12 +61,17 @@
 
         <?php 
 
-        if( isset($_REQUEST['new_name'])){
+        if(isset($_REQUEST['new_name'])){
             try
             {           
                 $new_name  = $_REQUEST['new_name'];
                 $num       = $_REQUEST['num'];
                 $ent       = $_REQUEST['entidade'];
+
+                echo($new_name);
+                echo($num);
+                echo($ent);
+
 
                 $host = "db.ist.utl.pt";
                 $user ="ist186512";
@@ -76,12 +81,14 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "UPDATE meio SET nomemeio = :new_name WHERE nummeio = :num AND nomeentidade = :entidade);";
+                $sql = "UPDATE meio SET nomemeio = :new_name WHERE nummeio = :num AND nomeentidade = :entidade;";
             
                 $result = $db->prepare($sql);
                 $result->execute([':new_name' => $new_name, ':num' => $num, ':entidade' => $ent]);
             
                 $db = null;
+
+                echo('skr');
 
                 $newURL = 'combate.php';
                 header('Location: '.$newURL);
