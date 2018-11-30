@@ -39,19 +39,25 @@
         <div class="centered">
             <h3>Inserir Meio</h3>
             <form action='meios.php' method='post'>
-                <h6>Nº: <input type='number' name='n' min='0' required='required'/></h6>
-                <h6>Nome: <input type='text' name='nome' required='required'/></h6>
-                <h6>Entidade: <input type='text' name='entidade' required='required'/></h6>
+                <h6>Nº: <input type='number' name='n' min='0' required='required' style='width: 150px;'/></h6>
+                <h6>Tipo: <select id="options form-control" style='width: 150px;'>
+                    <option value="Combate">Combate</option>
+                    <option value="Socorro">Socorro</option>
+                    <option value="Apoio">Apoio</option>
+                </select></h6>
+                <h6>Nome: <input type='text' name='nome' required='required' style='width: 150px;'/></h6>
+                <h6>Entidade: <input type='text' name='entidade' required='required' style='width: 150px;'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"/></h6>
             </form>
         </div>
 
         <?php 
 
-        if(isset($_REQUEST['n']) and isset($_REQUEST['nome']) and isset($_REQUEST['entidade'])){
+        if(isset($_REQUEST['n']) and isset($_REQUEST['nome']) and isset($_REQUEST['entidade']) and isset($_REQUEST['tipo'])){
             try
             {           
                 $num  = $_REQUEST['n']; 
+                $tipo = $_REQUEST['tipo'];
                 $name = $_REQUEST['nome'];
                 $ent  = $_REQUEST['entidade'];
 

@@ -39,7 +39,7 @@
         <div class="centered">
             <h3>Inserir Entidade</h3>
             <form action='entidades.php' method='post'>
-                <h6>Nome: <input type='text' name='nome' pattern='[A-Za-z0-9]{1,20}' required='required'/></h6>
+                <h6>Nome: <input type='text' name='nome' required='required'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"/></h6>
             </form>
         </div>
