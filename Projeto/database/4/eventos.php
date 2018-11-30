@@ -56,18 +56,30 @@
         <?php 
 
         if(isset($_REQUEST['tele'])){
-            try
-            {
+            $tele     = $_REQUEST['tele'];
+            $instante = str_replace("T"," ",$_REQUEST['instante']);
+            $processo = $_REQUEST['processo'];
 
-                $tele     = $_REQUEST['tele'];
-                $instante = str_replace("T"," ",$_REQUEST['instante']);
-                $processo = $_REQUEST['processo'];
+            $host = "db.ist.utl.pt";
+            $user ="ist186512";
+            $password = "fico6299";
+            $dbname = $user;
+        
+            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                echo($tele);
-                echo($instante);
-                echo($processo);
+            $sql = "SELECT * FROM processosocorro WHERE numprocessosocorro = :processo;";
+        
+            $result = $db->prepare($sql);
+            $result->execute([':processo'=> $processo]);
 
+            $process = $result->fetchAll();
+        
+            $db = null;
 
+            if(sizeOf($process)==0){
+                echo("<div class='centered'><h6>ERRO: Processo não existe</h6></div>");
+            }else{
                 $host = "db.ist.utl.pt";
                 $user ="ist186512";
                 $password = "fico6299";
@@ -76,22 +88,37 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+                $sql = "SELECT * FROM eventoemergencia WHERE numtelefone = :tele AND instantechamada = :instante;";
 
-            
-                $sql = "UPDATE eventoemergencia SET numprocessosocorro = :processo WHERE instantechamada = :instante AND numtelefone = :tele;";
-            
                 $result = $db->prepare($sql);
-                $result->execute([':processo'=> $processo, ':instante' => $instante, ':tele' => $tele]);
+                $result->execute([':tele'=> $tele, ':instante'=> $instante]);
+    
+                $process = $result->fetchAll();
             
                 $db = null;
+                if(sizeOf($process)==0){
+                    echo("<div class='centered'><h6>ERRO: Evento não existe</h6></div>");
+                }else{
+                    $host = "db.ist.utl.pt";
+                    $user ="ist186512";
+                    $password = "fico6299";
+                    $dbname = $user;
+                
+                    $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+                    $sql = "UPDATE eventoemergencia SET numprocessosocorro = :processo WHERE instantechamada = :instante AND numtelefone = :tele;";
+                
+                    $result = $db->prepare($sql);
+                    $result->execute([':processo'=> $processo, ':instante' => $instante, ':tele' => $tele]);
+                
+                    $db = null;
+    
+                    header("Refresh:0");
+                }
+            }
+        }    
 
-                header("Refresh:0");
-            }
-            catch (PDOException $e)
-            {
-                echo("<div class='centered'><h6>ERRO: O Processo já está associado ao Meio</h6></div>");
-            }
-        }
         ?>
 
         <div class="container">
