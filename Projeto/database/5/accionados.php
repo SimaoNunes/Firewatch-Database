@@ -44,7 +44,7 @@
         </div>
 
         <div class="centered">
-            <h3>Listar Meios por Processos</h3>
+            <h3>Listar Meios por Processo</h3>
             <form action='accionados.php' method='post'>
                 <h6>Nº Processo Socorro: <input type='number' name='n' min='0' required='required'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"/></h6>
@@ -61,6 +61,7 @@
                 $password = "fico6299";
                 $dbname = $user;
             
+
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -68,15 +69,28 @@
 
                 $result = $db->prepare($sql);
                 $result->execute([':n' => $n]);
+                
+                $process = $result->fetchAll();
+
                 $db = null;
-            
-                if($result==0){
+
+                if(sizeOf($process)==0){
                     echo("<div class='centered'><h6>ERRO: Processo não existe</h6></div>");
                 }
                 else{
+                    $host = 'db.ist.utl.pt';
+                    $user ="ist186512";
+                    $password = "fico6299";
+                    $dbname = $user;
+                
+                    $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
                     $sql = "SELECT * FROM acciona NATURAL JOIN meio WHERE numprocessosocorro = :n;";
+
                     $result = $db->prepare($sql);
                     $result->execute([':n' => $n]);
+
                     $db = null;
 
 
@@ -113,8 +127,8 @@
                             echo("</tbody>
                         </table>
                     </div>");
-                    }
-        }
+                }
+            }
         
 
         ?>
