@@ -79,10 +79,12 @@ for i in range (0, 102):
 
         if (dataHoraInicio not in used):
             used.append(dataHoraInicio)
-            todosVideos.append(str(dataHoraInicio) + ', ' + str(i))
 
             timeStampInicio = toTimestamp(dataHoraInicio)
             timeStampFim = toTimestamp(dataHoraFim)
+
+            todosVideos.append(timeStampInicio + ', ' + str(i))
+
             videos.append('insert into video values(' + timeStampInicio + ', ' + timeStampFim + ', ' + str(i) + ');')
             numSegmentos = randint(1, 2)
 
@@ -262,7 +264,6 @@ for i in range (0, 102):
 
     timeStampInicio = toTimestamp(dataHoraInicio)
     timeStampFim = toTimestamp(dataHoraFim)
-    # timeStampVideo = toTimestamp(video)
 
     solicita.append('insert into solicita values(' + str(i) + ', ' + video + ', ' + timeStampInicio + ', ' + timeStampFim + ');')
 

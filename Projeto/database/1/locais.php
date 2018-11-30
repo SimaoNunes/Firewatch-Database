@@ -32,9 +32,16 @@
             .centered{
                 margin: 20 auto;
             }
+            .leftie{
+                margin: 10 10;
+            }
         </style>
     </head>
     <body>
+
+        <div class="leftie">
+            <a href='.'><button type="button" class="btn btn-primary">Back</button></a>
+        </div>
         
         <div class="centered">
             <h3>Inserir Local</h3>
