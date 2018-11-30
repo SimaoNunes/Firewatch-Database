@@ -6,4 +6,4 @@ FROM (
 WHERE NOT EXISTS (
 	SELECT 1
 	FROM audita
-	WHERE numprocessosocorro = t1.numprocessosocorro AND nummeio = t1.nummeio AND nomeentidade = t1.nomeentidade)
+	WHERE numprocessosocorro = t1.numprocessosocorro AND nummeio = t1.nummeio AND nomeentidade = t1.nomeentidade);
