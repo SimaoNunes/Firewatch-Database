@@ -112,8 +112,8 @@
             <table class="table col-md-6">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Morada</th>
-                    <th scope="col">Remover</th>
+                    <th style='text-align:center'  scope="col">Morada</th>
+                    <th style='text-align:center'  scope="col">Remover</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -136,10 +136,10 @@
                 foreach($result as $row)
                 {
                     echo("<tr>");
-                    echo("<td>");
+                    echo("<td style='text-align:center' >");
                     echo($row['moradalocal']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center' >");
                     echo("<a href='locais.php?rem={$row['moradalocal']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
                     echo("</td>");
                     echo("<tr>");

@@ -45,8 +45,7 @@
             <table class="table col-md-4">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Número</th>
+                    <th style="text-align:center" scope="col">Número</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,10 +67,7 @@
                 foreach($result as $row)
                 {
                     echo("<tr>");
-                    echo("<td>");
-                    echo($count);
-                    echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['numprocessosocorro']);
                     echo("</td>");
                     echo("<tr>");

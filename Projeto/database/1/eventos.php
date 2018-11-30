@@ -115,12 +115,12 @@
             <table class="table col-md-12">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Instante</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Morada</th>
-                    <th scope="col">Nº Processo</th>
-                    <th scope="col">Remover</th>
+                    <th style='text-align:center' scope="col">Telefone</th>
+                    <th style='text-align:center' scope="col">Instante</th>
+                    <th style='text-align:center' scope="col">Nome</th>
+                    <th style='text-align:center' scope="col">Morada</th>
+                    <th style='text-align:center' scope="col">Nº Processo</th>
+                    <th style='text-align:center' scope="col">Remover</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -141,22 +141,22 @@
                 foreach($result as $row)
                 {
                     echo("<tr>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['numtelefone']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['instantechamada']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['nomepessoa']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['moradalocal']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['numprocessosocorro']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo("<a href='eventos.php?remNumTel={$row['numtelefone']}&remInstante={$row['instantechamada']}'><img width='20' src='https://goo.gl/uJnJJD'>");
                     echo("</td>");
                     echo("<tr>");

@@ -111,8 +111,8 @@
             <table class="table col-md-6">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Número</th>
-                    <th scope="col">Remover</th>
+                    <th style='text-align:center' scope="col">Número</th>
+                    <th style='text-align:center' scope="col">Remover</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -133,10 +133,10 @@
                 foreach($result as $row)
                 {
                     echo("<tr>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['numprocessosocorro']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo("<a href='processos.php?rem={$row['numprocessosocorro']}'><img width='20' src='https://goo.gl/uJnJJD'>");
                     echo("</td>");
                     echo("<tr>");

@@ -47,7 +47,7 @@
             <h3>Inserir Meio</h3>
             <form action='meios.php' method='post'>
                 <h6>Nº: <input type='number' name='n' min='0' required='required'/></h6>
-                <h6>Tipo: <select id="options form-control" style='width: 150px;'>
+                <h6>Tipo: <select class="form-control"  id="tipo" style='width: 150px;'>
                     <option value="Combate">Combate</option>
                     <option value="Socorro">Socorro</option>
                     <option value="Apoio">Apoio</option>
@@ -60,12 +60,14 @@
 
         <?php 
 
-        if(isset($_REQUEST['n']) and isset($_REQUEST['nome']) and isset($_REQUEST['entidade'])){
+        if(isset($_REQUEST['n']) and isset($_REQUEST['nome']) and isset($_REQUEST['entidade']) amd isset($_REQUEST['tipo']{
             try
             {           
-                $num  = $_REQUEST['n']; 
-                $name = $_REQUEST['nome'];
-                $ent  = $_REQUEST['entidade'];
+                $num   = $_REQUEST['n']; 
+                $name  = $_REQUEST['nome'];
+                $ent   = $_REQUEST['entidade'];
+                $tipo  = $_REQUEST['tipo'];
+
 
                 $host = "db.ist.utl.pt";
                 $user ="ist186512";
@@ -133,10 +135,10 @@
             <table class="table col-md-8">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Nº</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Entidade</th>
-                    <th scope="col">Remover</th>
+                    <th style='text-align:center' scope="col">Nº</th>
+                    <th style='text-align:center' scope="col">Nome</th>
+                    <th style='text-align:center' scope="col">Entidade</th>
+                    <th style='text-align:center' scope="col">Remover</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -157,16 +159,16 @@
                 foreach($result as $row)
                 {
                     echo("<tr>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['nummeio']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['nomemeio']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['nomeentidade']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo("<a href='meios.php?remN={$row['nummeio']}&remEnt={$row['nomeentidade']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
                     echo("</td>");
                     echo("<tr>");

@@ -45,10 +45,9 @@
             <table class="table col-md-8">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nº</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Entidade</th>
+                    <th style='text-align:center' scope="col">Nº</th>
+                    <th style='text-align:center' scope="col">Nome</th>
+                    <th style='text-align:center' scope="col">Entidade</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -70,16 +69,13 @@
                 foreach($result as $row)
                 {
                     echo("<tr>");
-                    echo("<td>");
-                    echo($count);
-                    echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['nummeio']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['nomemeio']);
                     echo("</td>");
-                    echo("<td>");
+                    echo("<td style='text-align:center'>");
                     echo($row['nomeentidade']);
                     echo("</td>");
                     echo("<tr>");
