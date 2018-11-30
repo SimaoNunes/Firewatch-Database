@@ -71,11 +71,10 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "INSERT INTO meio (nummeio,nomemeio,nomeentidade) VALUES (:num,:nome,:entidade);";
+                $sql = "INSERT INTO meioapoio (nummeio,nomeentidade) VALUES (:num,:entidade);";
             
                 $result = $db->prepare($sql);
                 $result->bindParam(':num', $num);
-                $result->bindParam(':nome', $name);
                 $result->bindParam(':entidade', $ent);
                 $result->execute();
             
