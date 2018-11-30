@@ -163,7 +163,7 @@
                     echo("<td style='text-align:center'>");
                     echo($row['nomeentidade']);
                     echo("<td style='text-align:center'>");
-                    echo("<a href='editSocorro.php?num={$row['nummeio']}&entidade={$row['nomeentidade']}'><img width='20' src='https://goo.gl/9tGAh8'></a>");
+                    echo("<a href='editSocorro.php?num={$row['nummeio']}&nome={$row['nomemeio']}&entidade={$row['nomeentidade']}'><img width='20' src='https://goo.gl/9tGAh8'></a>");
                     echo("</td>");
                     echo("</td>");
                     echo("<td style='text-align:center'>");
