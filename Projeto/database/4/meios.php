@@ -11,7 +11,6 @@
             }
             h3{
                 color: white;
-                margin-top: 30;
                 text-align: center;
             }
             h6{
@@ -41,23 +40,68 @@
     <body>
 
         <div class="leftie">
-            <a href='.'><button type="button" class="btn btn-primary">Back</button></a>
+            <a href='index.html'><button type="button" class="btn btn-primary">Back</button></a>
         </div>
         
         <div class="centered">
-            <h3>Meios</h3>
+            <h3>Inserir Meio e Processo de Socorro a associar</h3>
+            <form action='meios.php' method='post'>
+                <h6>Nº Meio: <input type='number' name='nMeio' min='0' required='required'/></h6>
+                <h6>Entidade: <input type='text' name='entidade' required='required'/></h6>
+                <h6>Nº Processo: <input type='number' name='nProcesso' min='0' required='required'/></h6>
+                <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
+            </form>
         </div>
 
+        <?php 
+
+        if(isset($_REQUEST['nMeio'])){
+            try
+            {
+
+                $nMeio     = $_REQUEST['nMeio'];
+                $entidade  = $_REQUEST['entidade'];
+                $nProcesso = $_REQUEST['nProcesso'];
+
+
+                $host = "db.ist.utl.pt";
+                $user ="ist186512";
+                $password = "fico6299";
+                $dbname = $user;
+            
+                $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+            
+                $sql = "INSERT INTO acciona (nummeio, nomeentidade, numprocessosocorro) VALUES (:nM, :nEntidade, :nP);";
+            
+                $result = $db->prepare($sql);
+                $result->execute([':nM'=> $nMeio, ':nEntidade'=>$entidade, ':nP'=> $nProcesso]);
+            
+                $db = null;
+
+                header("Refresh:0");
+            }
+            catch (PDOException $e)
+            {
+                echo("<div class='centered'><h6>ERRO:  já existe</h6></div>");
+            }
+        }
+        ?>
+
         <div class="container">
-            <table class="table col-md-8">
+            
+            <table class="table col-md-6">
                 <thead class="thead-dark">
                 <tr>
-                    <th style='text-align:center' scope="col">Nº</th>
-                    <th style='text-align:center' scope="col">Nome</th>
-                    <th style='text-align:center' scope="col">Entidade</th>
+                    <th style='text-align:center'  scope="col">Nº Meio</th>
+                    <th style='text-align:center'  scope="col">Entidade</th>
+                    <th style='text-align:center'  scope="col">Nº Processo Socorro</th>
                 </tr>
                 </thead>
                 <tbody>
+
                 <?php
 
                 $host = "db.ist.utl.pt";
@@ -68,25 +112,24 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "SELECT nummeio, nomemeio, nomeentidade FROM meio;";
+                $sql = "SELECT * FROM acciona ORDER BY numprocessosocorro, nummeio, nomeentidade ASC;";
+
                 $result = $db->prepare($sql);
                 $result->execute();
 
-                $count = 0;
                 foreach($result as $row)
                 {
                     echo("<tr>");
-                    echo("<td style='text-align:center'>");
+                    echo("<td style='text-align:center' >");
                     echo($row['nummeio']);
                     echo("</td>");
-                    echo("<td style='text-align:center'>");
-                    echo($row['nomemeio']);
-                    echo("</td>");
-                    echo("<td style='text-align:center'>");
+                    echo("<td style='text-align:center' >");
                     echo($row['nomeentidade']);
                     echo("</td>");
+                    echo("<td style='text-align:center' >");
+                    echo($row['numprocessosocorro']);
+                    echo("</td>");
                     echo("<tr>");
-                    $count = $count + 1;
                 }
         
                 $db = null;
