@@ -49,7 +49,7 @@
                 <h6>Telefone: <input type='text' name='tlfn' required='required'/></h6>
                 <h6>Instante de Chamada: <input type='datetime-local' step='1' name='instante' required='required'/></h6>
                 <h6>Nome da Pessoa: <input type='text' name='nome' required='required'/></h6>
-                <h6>Morada: <input type='text' name='morada' required='required'/></h6>
+                <h6>Local: <input type='text' name='morada' required='required'/></h6>
                 <h6>Nº Processo: <input type='number' name='n' min='0' required='required'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
             </form>
@@ -69,18 +69,79 @@
             $user ="ist186512";
             $password = "fico6299";
             $dbname = $user;
-
+        
             $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $sql = "INSERT INTO eventoemergencia (numtelefone, instantechamada, nomepessoa, moradalocal, numprocessosocorro) VALUES (:tlfn,:inst,:nome,:morada,:n);";
-
+            $sql = "SELECT * FROM local WHERE moradalocal = :morada;";
+        
             $result = $db->prepare($sql);
-            $result->execute([':tlfn' => $tlfn, ':inst' => $instante, ':nome' => $nome, ':morada' => $morada, ':n' => $num]);
+            $result->execute([':morada'=> $morada]);
 
+            $process = $result->fetchAll();
+        
             $db = null;
 
-            header("Refresh:0");
+            if(sizeOf($process)==0){
+                echo("<div class='centered'><h6>ERRO: Local não existe</h6></div>");
+            }else{
+                $host = "db.ist.utl.pt";
+                $user ="ist186512";
+                $password = "fico6299";
+                $dbname = $user;
+            
+                $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+                $sql = "SELECT * FROM processosocorro WHERE numprocessosocorro = :n;";
+            
+                $result = $db->prepare($sql);
+                $result->execute([':n'=> $num]);
+    
+                $process = $result->fetchAll();
+            
+                $db = null;
+    
+                if(sizeOf($process)==0){
+                    $host = "db.ist.utl.pt";
+                    $user ="ist186512";
+                    $password = "fico6299";
+                    $dbname = $user;
+    
+                    $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+                    $sql = "INSERT INTO processosocorro (numprocessosocorro) VALUES (:n);";
+    
+                    $result = $db->prepare($sql);
+                    $result->execute([':n'=> $num]);
+    
+                    $db = null;
+                }
+
+                try{
+                $host = "db.ist.utl.pt";
+                $user ="ist186512";
+                $password = "fico6299";
+                $dbname = $user;
+    
+                $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+                $sql = "INSERT INTO eventoemergencia (numtelefone, instantechamada, nomepessoa, moradalocal, numprocessosocorro) VALUES (:tlfn,:inst,:nome,:morada,:n);";
+    
+                $result = $db->prepare($sql);
+                $result->execute([':tlfn' => $tlfn, ':inst' => $instante, ':nome' => $nome, ':morada' => $morada, ':n' => $num]);
+    
+                $db = null;
+    
+                header("Refresh:0");
+                }
+                catch (PDOException $e)
+                {
+                    echo("<div class='centered'><h6>ERRO: Evento já existe</h6></div>");
+                }
+            }
         }
 
         if(isset($_REQUEST['remNumTel'])){
