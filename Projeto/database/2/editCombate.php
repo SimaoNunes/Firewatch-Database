@@ -43,16 +43,17 @@
         </style>
     </head>
     <body>
-        
+
         <div class="leftie">
             <a href="combate.php"><button type="button" class="btn btn-primary">Back</button></a>
         </div>
 
         <div class="centered">
             <h2>Editar Meio de Combate:</h2>
-            <form action='edit.php' method='post'>
+            <form action='editCombate.php' method='post'>
                 <h6>Nº: <?php echo($_REQUEST['num'])?> </h6>
                 <h6>Entidade: <?php echo($_REQUEST['entidade'])?> </h6>
+                <h6>Nome: <?php echo($_REQUEST['nome'])?> </h6>
                 <h6>Novo Nome: <input type='text' name='new_name' required='required'/> </h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"/> </h6>
             </form>
