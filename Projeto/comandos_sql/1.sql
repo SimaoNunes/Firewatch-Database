@@ -5,4 +5,4 @@ HAVING count(*) >= ALL (
     SELECT count(*)
     FROM acciona
     GROUP BY numprocessosocorro
-)
+);

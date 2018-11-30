@@ -1,5 +1,5 @@
 #---------------------------------------------------------------
-#--   Para correr:    python3 populator.py > populate.txt
+#--   Para correr:    python3 populator.py > populate.sql
 #---------------------------------------------------------------
 
 from random import randint
