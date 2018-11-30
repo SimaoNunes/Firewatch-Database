@@ -11,7 +11,6 @@
             }
             h3{
                 color: white;
-                margin-top: 30;
                 text-align: center;
             }
             h6{
@@ -41,23 +40,74 @@
     <body>
 
         <div class="leftie">
-            <a href='.'><button type="button" class="btn btn-primary">Back</button></a>
+            <a href='index.html'><button type="button" class="btn btn-primary">Back</button></a>
         </div>
         
         <div class="centered">
-            <h3>Meios</h3>
+            <h3>Inserir Evento e Processo de Socorro a associar</h3>
+            <form action='eventos.php' method='post'>
+                <h6>Telefone: <input type='text' name='tele' required='required'/></h6>
+                <h6>Instante de Chamada: <input type='datetime-local' step='1' name='instante' required='required'/></h6>
+                <h6>Nº Processo: <input type='number' name='processo' min='0' required='required'/></h6>
+                <h6><input class="btn btn-success" type="submit" value="Submit"></h6>
+            </form>
         </div>
 
+        <?php 
+
+        if(isset($_REQUEST['tele'])){
+            try
+            {
+
+                $tele     = $_REQUEST['tele'];
+                $instante = str_replace("T"," ",$_REQUEST['instante']);
+                $processo = $_REQUEST['processo'];
+
+                echo($tele);
+                echo($instante);
+                echo($processo);
+
+
+                $host = "db.ist.utl.pt";
+                $user ="ist186512";
+                $password = "fico6299";
+                $dbname = $user;
+            
+                $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+            
+                $sql = "UPDATE eventoemergencia SET numprocessosocorro = :processo WHERE instantechamada = :instane AND numtelefone = :tele;";
+            
+                $result = $db->prepare($sql);
+                $result->execute([':processo'=> $processo, ':instante'=>$instante, ':tele'=> $tele]);
+            
+                $db = null;
+
+                header("Refresh:0");
+            }
+            catch (PDOException $e)
+            {
+                echo("<div class='centered'><h6>ERRO: O Processo já está associado ao Meio</h6></div>");
+            }
+        }
+        ?>
+
         <div class="container">
+            
             <table class="table col-md-8">
                 <thead class="thead-dark">
                 <tr>
-                    <th style='text-align:center' scope="col">Nº</th>
+                <th style='text-align:center' scope="col">Telefone</th>
+                    <th style='text-align:center' scope="col">Instante</th>
                     <th style='text-align:center' scope="col">Nome</th>
-                    <th style='text-align:center' scope="col">Entidade</th>
+                    <th style='text-align:center' scope="col">Morada</th>
+                    <th style='text-align:center' scope="col">Nº Processo</th>
                 </tr>
                 </thead>
                 <tbody>
+
                 <?php
 
                 $host = "db.ist.utl.pt";
@@ -68,25 +118,29 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "SELECT nummeio, nomemeio, nomeentidade FROM meio;";
+                $sql = "SELECT * FROM eventoemergencia ORDER BY instantechamada ASC;";
+
                 $result = $db->prepare($sql);
                 $result->execute();
 
-                $count = 0;
                 foreach($result as $row)
                 {
                     echo("<tr>");
                     echo("<td style='text-align:center'>");
-                    echo($row['nummeio']);
+                    echo($row['numtelefone']);
                     echo("</td>");
                     echo("<td style='text-align:center'>");
-                    echo($row['nomemeio']);
+                    echo($row['instantechamada']);
                     echo("</td>");
                     echo("<td style='text-align:center'>");
-                    echo($row['nomeentidade']);
+                    echo($row['nomepessoa']);
                     echo("</td>");
-                    echo("<tr>");
-                    $count = $count + 1;
+                    echo("<td style='text-align:center'>");
+                    echo($row['moradalocal']);
+                    echo("</td>");
+                    echo("<td style='text-align:center'>");
+                    echo($row['numprocessosocorro']);
+                    echo("</td>");
                 }
         
                 $db = null;
