@@ -47,11 +47,6 @@
             <h3>Inserir Meio</h3>
             <form action='meios.php' method='post'>
                 <h6>Nº: <input type='number' name='n' min='0' required='required'/></h6>
-                <h6>Tipo: <select class="form-control"  id="tipo" style='width: 150px;'>
-                    <option value="Combate">Combate</option>
-                    <option value="Socorro">Socorro</option>
-                    <option value="Apoio">Apoio</option>
-                </select></h6>
                 <h6>Nome: <input type='text' name='nome' required='required'/></h6>
                 <h6>Entidade: <input type='text' name='entidade' required='required'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"/></h6>
@@ -60,13 +55,12 @@
 
         <?php 
 
-        if(isset($_REQUEST['n']) and isset($_REQUEST['nome']) and isset($_REQUEST['entidade']) amd isset($_REQUEST['tipo']{
+        if(isset($_REQUEST['n']) and isset($_REQUEST['nome']) and isset($_REQUEST['entidade']) ){
             try
             {           
                 $num   = $_REQUEST['n']; 
                 $name  = $_REQUEST['nome'];
                 $ent   = $_REQUEST['entidade'];
-                $tipo  = $_REQUEST['tipo'];
 
 
                 $host = "db.ist.utl.pt";
