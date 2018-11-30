@@ -56,14 +56,30 @@
         <?php 
 
         if(isset($_REQUEST['nMeio'])){
-            try
-            {
+            $nMeio     = $_REQUEST['nMeio'];
+            $entidade  = $_REQUEST['entidade'];
+            $nProcesso = $_REQUEST['nProcesso'];
 
-                $nMeio     = $_REQUEST['nMeio'];
-                $entidade  = $_REQUEST['entidade'];
-                $nProcesso = $_REQUEST['nProcesso'];
+            $host = "db.ist.utl.pt";
+            $user ="ist186512";
+            $password = "fico6299";
+            $dbname = $user;
+        
+            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+            $sql = "SELECT * FROM processosocorro WHERE numprocessosocorro = :nP;";
+        
+            $result = $db->prepare($sql);
+            $result->execute([':nP'=> $nProcesso]);
 
+            $process = $result->fetchAll();
+        
+            $db = null;
+
+            if(sizeOf($process)==0){
+                echo("<div class='centered'><h6>ERRO: Processo não existe</h6></div>");
+            }else{
                 $host = "db.ist.utl.pt";
                 $user ="ist186512";
                 $password = "fico6299";
@@ -71,28 +87,53 @@
             
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-            
-                $sql = "INSERT INTO acciona (nummeio, nomeentidade, numprocessosocorro) VALUES (:nM, :nEntidade, :nP);";
+    
+                $sql = "SELECT * FROM meio WHERE nummeio = :nM AND nomeentidade = :nEntidade;";
             
                 $result = $db->prepare($sql);
-                $result->execute([':nM'=> $nMeio, ':nEntidade'=>$entidade, ':nP'=> $nProcesso]);
+                $result->execute([':nM'=> $nMeio, ':nEntidade'=>$entidade,]);
+    
+                $process = $result->fetchAll();
             
                 $db = null;
 
-                header("Refresh:0");
-            }
-            catch (PDOException $e)
-            {
-                echo("<div class='centered'><h6>ERRO: O Processo já está associado ao Meio</h6></div>");
+                if(sizeOf($process)==0){
+                    echo("<div class='centered'><h6>ERRO: Meio não existe</h6></div>");
+                }else{
+                    try
+                    {
+                        $host = "db.ist.utl.pt";
+                        $user ="ist186512";
+                        $password = "fico6299";
+                        $dbname = $user;
+                    
+                        $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        
+                    
+                        $sql = "INSERT INTO acciona (nummeio, nomeentidade, numprocessosocorro) VALUES (:nM, :nEntidade, :nP);";
+                    
+                        $result = $db->prepare($sql);
+                        $result->execute([':nM'=> $nMeio, ':nEntidade'=>$entidade, ':nP'=> $nProcesso]);
+                    
+                        $db = null;
+        
+                        header("Refresh:0");
+                    }
+                    catch (PDOException $e)
+                    {
+                        echo("<div class='centered'><h6>ERRO: O Processo já está associado ao Meio</h6></div>");
+                    }
+                }
             }
         }
+
         ?>
 
         <div class="container">
             
-            <table class="table col-md-6">
+            <table class="table col-md-7">
                 <thead class="thead-dark">
                 <tr>
                     <th style='text-align:center'  scope="col">Nº Meio</th>
