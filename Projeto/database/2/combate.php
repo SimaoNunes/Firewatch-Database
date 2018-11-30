@@ -113,8 +113,6 @@
         
             $db = null;
 
-            echo('deu');
-
             $newURL = 'meios.php';
             header('Location: '.$newURL);
 
@@ -165,7 +163,7 @@
                     echo("</td>");
                     echo("</td>");
                     echo("<td style='text-align:center'>");
-                    echo("<a href='meios.php?remN={$row['nummeio']}&remEnt={$row['nomeentidade']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
+                    echo("<a href='combate.php?remN={$row['nummeio']}&remEnt={$row['nomeentidade']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
                     echo("</td>");
                     echo("<tr>");
                 }

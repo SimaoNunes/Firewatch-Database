@@ -155,14 +155,14 @@ CREATE TABLE audita(
 );
 
  CREATE TABLE solicita(
-     idCoordenador INT NOT NULL UNIQUE,
-     dataHoraInicioVideo TIMESTAMP NOT NULL,
-     numCamara INT NOT NULL,
-     dataHoraInicio TIMESTAMP NOT NULL,
-     dataHoraFim TIMESTAMP NOT NULL,
-     PRIMARY KEY(idCoordenador, dataHoraInicioVideo, numCamara),
-     FOREIGN KEY(idCoordenador) REFERENCES coordenador(idCoordenador) ON DELETE CASCADE,
-     FOREIGN KEY(dataHoraInicioVideo, numCamara) REFERENCES video(dataHoraInicio, numCamara) ON DELETE CASCADE
+    idCoordenador INT NOT NULL UNIQUE,
+    dataHoraInicioVideo TIMESTAMP NOT NULL,
+    numCamara INT NOT NULL,
+    dataHoraInicio TIMESTAMP NOT NULL,
+    dataHoraFim TIMESTAMP NOT NULL,
+    PRIMARY KEY(idCoordenador, dataHoraInicioVideo, numCamara),
+    FOREIGN KEY(idCoordenador) REFERENCES coordenador(idCoordenador) ON DELETE CASCADE,
+    FOREIGN KEY(dataHoraInicioVideo, numCamara) REFERENCES video(dataHoraInicio, numCamara) ON DELETE CASCADE
  );
 
 

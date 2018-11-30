@@ -132,6 +132,7 @@
                     <th style='text-align:center' scope="col">Nº</th>
                     <th style='text-align:center' scope="col">Nome</th>
                     <th style='text-align:center' scope="col">Entidade</th>
+                    <th style='text-align:center' scope="col">Editar</th>
                     <th style='text-align:center' scope="col">Remover</th>
                 </tr>
                 </thead>
@@ -146,7 +147,7 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "SELECT nummeio, nomemeio, nomeentidade FROM meio ORDER BY nomeentidade, nummeio ASC;";
+                $sql = "SELECT nummeio, nomeentidade, nomemeio FROM meiocombate NATURAL JOIN meio ORDER BY nomeentidade, nummeio ASC;";
                 $result = $db->prepare($sql);
                 $result->execute();
 
@@ -161,9 +162,12 @@
                     echo("</td>");
                     echo("<td style='text-align:center'>");
                     echo($row['nomeentidade']);
+                    echo("<td style='text-align:center'>");
+                    echo("<a href='editSocorro.php?num={$row['nummeio']}&nome={$row['nomemeio']}&entidade={$row['nomeentidade']}'><img width='20' src='https://goo.gl/9tGAh8'></a>");
+                    echo("</td>");
                     echo("</td>");
                     echo("<td style='text-align:center'>");
-                    echo("<a href='meios.php?remN={$row['nummeio']}&remEnt={$row['nomeentidade']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
+                    echo("<a href='socorro.php?remN={$row['nummeio']}&remEnt={$row['nomeentidade']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
                     echo("</td>");
                     echo("<tr>");
                 }
