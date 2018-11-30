@@ -4,7 +4,7 @@
         <link rel="icon" type="image/png" href= "http://www.pngall.com/wp-content/uploads/2016/04/Database-PNG.png">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <title>Meios</title>
+        <title>Meios de Combate</title>
         <style>
             body{
                 background-color: #474747;
@@ -47,7 +47,6 @@
             <h3>Inserir Meio</h3>
             <form action='meios.php' method='post'>
                 <h6>Nº: <input type='number' name='n' min='0' required='required'/></h6>
-                <h6>Nome: <input type='text' name='nome' required='required'/></h6>
                 <h6>Entidade: <input type='text' name='entidade' required='required'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"/></h6>
             </form>
@@ -55,11 +54,10 @@
 
         <?php 
 
-        if(isset($_REQUEST['n']) and isset($_REQUEST['nome']) and isset($_REQUEST['entidade']) ){
+        if(isset($_REQUEST['n']) and isset($_REQUEST['entidade']) ){
             try
             {           
                 $num   = $_REQUEST['n']; 
-                $name  = $_REQUEST['nome'];
                 $ent   = $_REQUEST['entidade'];
 
 
@@ -132,6 +130,7 @@
                     <th style='text-align:center' scope="col">Nº</th>
                     <th style='text-align:center' scope="col">Nome</th>
                     <th style='text-align:center' scope="col">Entidade</th>
+                    <th style='text-align:center' scope="col">Editar</th>
                     <th style='text-align:center' scope="col">Remover</th>
                 </tr>
                 </thead>
@@ -146,7 +145,7 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "SELECT nummeio, nomemeio, nomeentidade FROM meio ORDER BY nomeentidade, nummeio ASC;";
+                $sql = "SELECT nummeio, nomeentidade, nomemeio FROM meiocombate NATURAL JOIN meio ORDER BY nomeentidade, nummeio ASC;";
                 $result = $db->prepare($sql);
                 $result->execute();
 
@@ -161,6 +160,9 @@
                     echo("</td>");
                     echo("<td style='text-align:center'>");
                     echo($row['nomeentidade']);
+                    echo("<td style='text-align:center'>");
+                    echo("<a href='editCombate.php?num={$row['nummeio']}&entidade={$row['nomeentidade']}'><img width='20' src='https://goo.gl/9tGAh8'></a>");
+                    echo("</td>");
                     echo("</td>");
                     echo("<td style='text-align:center'>");
                     echo("<a href='meios.php?remN={$row['nummeio']}&remEnt={$row['nomeentidade']}'><img width='20' src='https://goo.gl/uJnJJD'></a>");
