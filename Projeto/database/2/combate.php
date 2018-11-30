@@ -44,7 +44,7 @@
         </div>
 
         <div class="centered">
-            <h3>Inserir Meio</h3>
+            <h3>Inserir Meio de Combate</h3>
             <form action='meios.php' method='post'>
                 <h6>Nº: <input type='number' name='n' min='0' required='required'/></h6>
                 <h6>Entidade: <input type='text' name='entidade' required='required'/></h6>

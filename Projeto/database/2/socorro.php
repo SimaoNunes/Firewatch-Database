@@ -44,7 +44,7 @@
         </div>
 
         <div class="centered">
-            <h3>Inserir Meio</h3>
+            <h3>Inserir Meio de Socorro</h3>
             <form action='meios.php' method='post'>
                 <h6>Nº: <input type='number' name='n' min='0' required='required'/></h6>
                 <h6>Nome: <input type='text' name='nome' required='required'/></h6>
@@ -147,7 +147,7 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "SELECT nummeio, nomeentidade, nomemeio FROM meiocombate NATURAL JOIN meio ORDER BY nomeentidade, nummeio ASC;";
+                $sql = "SELECT nummeio, nomeentidade, nomemeio FROM meiosocorro NATURAL JOIN meio ORDER BY nomeentidade, nummeio ASC;";
                 $result = $db->prepare($sql);
                 $result->execute();
 

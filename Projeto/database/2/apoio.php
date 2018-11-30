@@ -145,7 +145,7 @@
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $sql = "SELECT nummeio, nomeentidade, nomemeio FROM meiocombate NATURAL JOIN meio ORDER BY nomeentidade, nummeio ASC;";
+                $sql = "SELECT nummeio, nomeentidade, nomemeio FROM meioapoio NATURAL JOIN meio ORDER BY nomeentidade, nummeio ASC;";
                 $result = $db->prepare($sql);
                 $result->execute();
 
