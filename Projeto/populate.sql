@@ -3345,7 +3345,7 @@ insert into solicita values(101, '2018-04-14 16:02:03', 24, '2018-11-21 20:54:48
 
 
 
-
+----------------------------------------
 
 insert into eventoEmergencia values(920456234, '2018-04-20 00:16:20', 'Dillaz', 'Oliveira do Hospital', 42);
 
@@ -3357,6 +3357,10 @@ insert into segmentoVideo values(0, 70, '2018-08-30 16:31:14', 102);
 insert into vigia values('Monchique', 102);
 
 insert into entidadeMeio values('Câmara Municipal de Portimão');
+
+
+
+insert into processoSocorro values(102);
 
 
 
