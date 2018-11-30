@@ -78,10 +78,10 @@
 
 
             
-                $sql = "UPDATE eventoemergencia SET numprocessosocorro = :processo WHERE instantechamada = :instane AND numtelefone = :tele;";
+                $sql = "UPDATE eventoemergencia SET numprocessosocorro = :processo WHERE instantechamada = :instante AND numtelefone = :tele;";
             
                 $result = $db->prepare($sql);
-                $result->execute([':processo'=> $processo, ':instante'=>$instante, ':tele'=> $tele]);
+                $result->execute([':processo'=> $processo, ':instante' => $instante, ':tele' => $tele]);
             
                 $db = null;
 
