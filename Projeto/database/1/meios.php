@@ -60,7 +60,7 @@
 
         <?php 
 
-        if(isset($_REQUEST['n']) and isset($_REQUEST['nome']) and isset($_REQUEST['entidade']) amd isset($_REQUEST['tipo']{
+        if(isset($_REQUEST['n']) and isset($_REQUEST['nome']) and isset($_REQUEST['entidade']) and isset($_REQUEST['tipo']{
             try
             {           
                 $num   = $_REQUEST['n']; 
