@@ -44,7 +44,7 @@
         </div>
 
         <div class="centered">
-            <h3>Listar Meios de Socorro accionados em Processos originados num dado Local de Incêndio</h3>
+            <h3>Listar Meios de Socorro accionados num dado Local de Incêndio</h3>
             <form action='listar.php' method='post'>
                 <h6>Local Incêndio: <input type='text' name='local' required='required'/></h6>
                 <h6><input class="btn btn-success" type="submit" value="Submit"/></h6>
@@ -53,60 +53,75 @@
 
         <?php 
 
-        if(isset($_REQUEST['local'])){
+            if(isset($_REQUEST['local'])){
+                $morada = $_REQUEST['local'];
 
-            $morada = $_REQUEST['local'];
+                $host = 'db.ist.utl.pt';
+                $user ="ist186512";
+                $password = "fico6299";
+                $dbname = $user;
+            
+                $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+                $sql = "SELECT * FROM local WHERE moradalocal = :morada;";
 
-            $host = 'db.ist.utl.pt';
-            $user ="ist186512";
-            $password = "fico6299";
-            $dbname = $user;
+                $result = $db->prepare($sql);
+                $result->execute([':morada' => $morada]);
+
+                $process = $result->fetchAll();
+
+                $db = null;
+
+                if(sizeOf($process)==0){
+                    echo("<div class='centered'><h6>ERRO: Local não existe</h6></div>");
+                }else{
+                    $host = 'db.ist.utl.pt';
+                    $user ="ist186512";
+                    $password = "fico6299";
+                    $dbname = $user;
+                
+                    $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+                    $sql = "SELECT nummeio, nomemeio, nomeentidade FROM meiosocorro NATURAL JOIN meio NATURAL JOIN acciona NATURAL JOIN eventoemergencia WHERE moradalocal = :morada;";
         
-            $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $result = $db->prepare($sql);
+                    $result->execute([':morada' => $morada]);
         
-            $sql = "SELECT nummeio, nomemeio, nomeentidade FROM meiosocorro NATURAL JOIN meio NATURAL JOIN acciona NATURAL JOIN eventoemergencia WHERE moradalocal = :morada;";
-            $result = $db->prepare($sql);
-            $result->execute([':morada' => $morada]);
-            $db = null;
-
-            if(count($result)!=0){
-                echo("<div class='container'>
-                        <table class='table col-md-8'>
-                        <thead class='thead-dark'>
-                        <tr>
-                            <th style='text-align:center' scope='col'>Nº Meio</th>
-                            <th style='text-align:center' scope='col'>Nome</th>
-                            <th style='text-align:center' scope='col'>Entidade</th>
-                        </tr>
-                        </thead>
-                        <tbody>");
-
-                        foreach($result as $row)
-                        {
-                            echo("<tr>");
-                            echo("<td style='text-align:center'>");
-                            echo($row['nummeio']);
-                            echo("</td>");
-                            echo("<td style='text-align:center'>");
-                            echo($row['nomemeio']);
-                            echo("</td>");
-                            echo("<td style='text-align:center'>");
-                            echo($row['nomeentidade']);
-                            echo("</td>");
-                            echo("<tr>");
-                        }
-
-                        echo("</tbody>
-                    </table>
-                </div>");
-            }else{
-                echo("<div class='container'>
-                    <h6>ERR: Não existe um Processo Socorro com o número inserido</h6>
-                </div>");
+                    $db = null;
+        
+                    echo("<div class='container'>
+                            <table class='table col-md-8'>
+                            <thead class='thead-dark'>
+                            <tr>
+                                <th style='text-align:center' scope='col'>Nº Meio</th>
+                                <th style='text-align:center' scope='col'>Nome</th>
+                                <th style='text-align:center' scope='col'>Entidade</th>
+                            </tr>
+                            </thead>
+                            <tbody>");
+        
+                            foreach($result as $row)
+                            {
+                                echo("<tr>");
+                                echo("<td style='text-align:center'>");
+                                echo($row['nummeio']);
+                                echo("</td>");
+                                echo("<td style='text-align:center'>");
+                                echo($row['nomemeio']);
+                                echo("</td>");
+                                echo("<td style='text-align:center'>");
+                                echo($row['nomeentidade']);
+                                echo("</td>");
+                                echo("<tr>");
+                            }
+        
+                            echo("</tbody>
+                        </table>
+                    </div>");
+                }
             }
-
-        }
         
 
         ?>

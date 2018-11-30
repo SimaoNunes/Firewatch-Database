@@ -85,7 +85,7 @@
             }
             catch (PDOException $e)
             {
-                echo("<div class='centered'><h6>ERRO:  já existe</h6></div>");
+                echo("<div class='centered'><h6>ERRO: O Processo já está associado ao Meio</h6></div>");
             }
         }
         ?>

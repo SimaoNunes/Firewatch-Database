@@ -53,7 +53,7 @@
 
         <?php 
 
-        if(isset($_REQUEST['n'])){
+            if(isset($_REQUEST['n'])){
                 $n = $_REQUEST['n'];
 
                 $host = 'db.ist.utl.pt';
@@ -76,8 +76,7 @@
 
                 if(sizeOf($process)==0){
                     echo("<div class='centered'><h6>ERRO: Processo não existe</h6></div>");
-                }
-                else{
+                }else{
                     $host = 'db.ist.utl.pt';
                     $user ="ist186512";
                     $password = "fico6299";
