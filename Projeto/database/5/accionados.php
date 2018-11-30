@@ -61,6 +61,7 @@
                 $password = "fico6299";
                 $dbname = $user;
             
+
                 $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -68,15 +69,28 @@
 
                 $result = $db->prepare($sql);
                 $result->execute([':n' => $n]);
+                
+                $process = $result->fetchAll();
+
                 $db = null;
-            
-                if($result==0){
+
+                if(sizeOf($process)==0){
                     echo("<div class='centered'><h6>ERRO: Processo não existe</h6></div>");
                 }
                 else{
+                    $host = 'db.ist.utl.pt';
+                    $user ="ist186512";
+                    $password = "fico6299";
+                    $dbname = $user;
+                
+                    $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
+                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
                     $sql = "SELECT * FROM acciona NATURAL JOIN meio WHERE numprocessosocorro = :n;";
+
                     $result = $db->prepare($sql);
                     $result->execute([':n' => $n]);
+
                     $db = null;
 
 
@@ -113,8 +127,8 @@
                             echo("</tbody>
                         </table>
                     </div>");
-                    }
-        }
+                }
+            }
         
 
         ?>
